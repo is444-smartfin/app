@@ -9,19 +9,34 @@ const cardEqualHeight = {
   height: "100%",
 };
 
-const cardFooter = {
-  marginTop: "auto",
-};
+const initialFormData = Object.freeze({
+  userId: "",
+  pin: "",
+  otp: "",
+});
 
 function AccountsLinktBank() {
   const { user, getAccessTokenSilently } = useAuth0();
+  const [formData, updateFormData] = useState(initialFormData);
 
-  useEffect(() => {
-    const getUserMetadata = async () => {
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  // Step 1: Request OTP
+  const handleRequestOtp = () => {
+    // e.preventDefault();
+    const data = { ...formData };
+    console.log(data);
+
+    const requestOtp = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        const data = "123";
-        fetch(`${API_URL}/users/onboarding`, {
+        fetch(`${API_URL}/accounts/tbank/mfa`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -29,14 +44,48 @@ function AccountsLinktBank() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        }).then((response) => console.log(response));
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+          });
       } catch (e) {
         console.error(e.message);
       }
     };
 
-    getUserMetadata();
-  }, [getAccessTokenSilently, user]);
+    requestOtp();
+  };
+
+  // Step 2: Link account
+  const handleSubmit = () => {
+    // e.preventDefault();
+    const data = { ...formData };
+    console.log(data);
+
+    const requestAccountLinkage = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+        fetch(`${API_URL}/accounts/tbank/link`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+          });
+      } catch (e) {
+        console.error(e.message);
+      }
+    };
+
+    requestAccountLinkage();
+  };
 
   return (
     <div>
@@ -44,7 +93,7 @@ function AccountsLinktBank() {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">Link tBank Account</h1>
-            <h2 className="subtitle">Link your banks accounts</h2>
+            <h2 className="subtitle">You&rsquo;re almost there!</h2>
           </div>
         </div>
       </section>
@@ -77,14 +126,75 @@ function AccountsLinktBank() {
                     />{" "}
                     tBank
                   </h2>
-                  Link your tBank Account
+                  <div className="columns">
+                    <div className="column">
+                      <div className="field">
+                        <label className="label" htmlFor="userId">
+                          User ID
+                          <input
+                            className="control input"
+                            name="userId"
+                            type="text"
+                            placeholder=""
+                            onChange={handleChange}
+                          />
+                        </label>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="pin">
+                          PIN
+                          <input
+                            className="control input"
+                            name="pin"
+                            type="password"
+                            placeholder=""
+                            onChange={handleChange}
+                          />
+                        </label>
+                      </div>
+
+                      <label className="label" id="otp" htmlFor="otp">
+                        OTP
+                      </label>
+                      <div className="field has-addons">
+                        <div className="control">
+                          <input
+                            className="control input"
+                            name="otp"
+                            type="text"
+                            pattern="[0-9]*"
+                            inputMode="numeric"
+                            maxLength="6"
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="control">
+                          <button
+                            type="button"
+                            className="button is-info"
+                            onClick={() => handleRequestOtp()}
+                          >
+                            Request OTP
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="field is-grouped">
+                        <div className="control">
+                          <button
+                            type="submit"
+                            className="button is-link"
+                            onClick={() => handleSubmit()}
+                          >
+                            Login
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
-                  Link
-                </Link>
-              </footer>
             </div>
           </div>
         </div>

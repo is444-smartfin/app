@@ -9,7 +9,6 @@
     "extends": [
       "airbnb",
       "plugin:react/recommended",
-      "plugin:jsx-a11y/strict",
       "plugin:prettier/recommended",
       "prettier/react"
     ],

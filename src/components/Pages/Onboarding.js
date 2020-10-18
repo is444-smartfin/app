@@ -12,10 +12,10 @@ function Onboarding() {
   const token = params.get("token");
   // console.log(jwtClaims);
 
-  const [formData, updateFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
-    updateFormData({
+    setFormData({
       ...formData,
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
