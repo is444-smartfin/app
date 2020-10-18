@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { API_URL } from "../../utils/utils";
+import { API_URL, AUTH0_DOMAIN } from "../../utils/utils";
 
 const initialFormData = Object.freeze({
   name: "",
@@ -24,9 +24,6 @@ function Onboarding() {
 
   const handleSubmit = (e) => {
     // e.preventDefault();
-
-    // Set final post data to include email, not very secure but ok
-    // Should send bearer token instead, then check serverside!
     const data = { ...formData, token };
 
     // Post to API
@@ -35,13 +32,14 @@ function Onboarding() {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`, // So that our API will know who's calling it :)
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     }).then((response) => console.log(response));
     const state = params.get("state");
-    // window.location.href = `https://is452.us.auth0.com/continue?state=${state}`;
+    // We're not done with authentication, redirect back to Auth0!
+    window.location.href = `${AUTH0_DOMAIN}/continue?state=${state}`;
   };
 
   return (

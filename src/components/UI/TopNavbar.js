@@ -56,8 +56,8 @@ function TopNavbar() {
             <Link to="/" className="navbar-item">
               Home
             </Link>
-            <Link to="/stuff" className="navbar-item">
-              Stuff
+            <Link to="/accounts/link" className="navbar-item">
+              Accounts
             </Link>
             <Link to="/profile" className="navbar-item">
               Profile

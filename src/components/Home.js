@@ -11,6 +11,10 @@ const cardFooter = {
   marginTop: "auto",
 };
 
+const imageVerticalAlign = {
+  "vertical-align": "middle",
+};
+
 function Home() {
   return (
     <>
@@ -18,9 +22,15 @@ function Home() {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">
-              Singapore’s Biggest Personal Finance Platform
+              Do more with the things you{" "}
+              <span role="img" aria-label="love">
+                ❤️
+              </span>
             </h1>
-            <p>Help your personalize your finances smartly.</p>
+            <p>
+              Helping you personalize your finances smartly, in new and
+              remarkable ways.
+            </p>
           </div>
         </div>
       </section>
@@ -31,22 +41,24 @@ function Home() {
               <div className="card-content">
                 <div className="content">
                   <h2>
-                    <span role="img" aria-label="airplane">
-                      🛫
-                    </span>{" "}
-                    Flight Insurance
+                    <span role="img" aria-label="money">
+                      💰{" "}
+                    </span>
+                    Save 30% of my salary to another account
                   </h2>
-                  First decentralized insurance. Payouts are automatic and
-                  almost instant. Now fully licensed.{" "}
+                  <img
+                    src="https://tbankonline.com/img/tBank.ico"
+                    alt="tBank Logo"
+                    className="image is-16x16 is-inline-block"
+                    style={imageVerticalAlign}
+                  />{" "}
+                  tBank
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
                 <Link to="/" className="card-footer-item">
-                  Buy
+                  Connect
                 </Link>
-                <a href="https://t.me/is452_smu" className="card-footer-item">
-                  Join the Community
-                </a>
               </footer>
             </div>
           </div>
@@ -55,22 +67,24 @@ function Home() {
               <div className="card-content">
                 <div className="content">
                   <h2>
-                    <span role="img" aria-label="rain">
-                      🌧️
-                    </span>{" "}
-                    Rain Insurance
+                    <span role="img" aria-label="email">
+                      📧{" "}
+                    </span>
+                    Send me a weekly spending digest
                   </h2>
-                  Protect yourself against price surge when it rains! Get back
-                  60% of your fare on Grab, Ryde & GOJEK.
+                  <img
+                    src="https://tbankonline.com/img/tBank.ico"
+                    alt="tBank Logo"
+                    className="image is-16x16 is-inline-block"
+                    style={imageVerticalAlign}
+                  />{" "}
+                  tBank
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
                 <Link to="/" className="card-footer-item">
-                  Buy
+                  Connect
                 </Link>
-                <a href="https://t.me/is452_smu" className="card-footer-item">
-                  Join the Community
-                </a>
               </footer>
             </div>
           </div>
@@ -79,23 +93,25 @@ function Home() {
               <div className="card-content">
                 <div className="content">
                   <h2>
-                    <span role="img" aria-label="airplane">
-                      🌾
-                    </span>{" "}
-                    Crop Insurance
+                    <span role="img" aria-label="money">
+                      💰{" "}
+                    </span>
+                    Round up my debit card purchases to the nearest S$1 and save
+                    it
                   </h2>
-                  Select your crop and the location of your field. Automated
-                  payouts are triggered by drought or flood events reported by
-                  government agencies.
+                  <img
+                    src="https://tbankonline.com/img/tBank.ico"
+                    alt="tBank Logo"
+                    className="image is-16x16 is-inline-block"
+                    style={imageVerticalAlign}
+                  />{" "}
+                  tBank
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
                 <Link to="/" className="card-footer-item">
-                  Buy
+                  Connect
                 </Link>
-                <a href="https://t.me/is452_smu" className="card-footer-item">
-                  Join the Community
-                </a>
               </footer>
             </div>
           </div>

@@ -5,6 +5,8 @@ import TopNavbar from "./components/UI/TopNavbar";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Profile from "./components/Pages/Profile";
 import Onboarding from "./components/Pages/Onboarding";
+import AccountsLink from "./components/Pages/AccountsLink";
+import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
 
 export default function Router() {
   return (
@@ -18,6 +20,17 @@ export default function Router() {
             <Home />
           </Route>
           <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute
+            exact
+            path="/accounts/link"
+            component={AccountsLink}
+          />
+          <ProtectedRoute
+            exact
+            path="/accounts/link/tbank"
+            component={AccountsLinktBank}
+          />
+
           <Route path="/onboarding" component={Onboarding} />
         </Switch>
       </div>
