@@ -16,11 +16,13 @@ const initialFormData = Object.freeze({
 });
 
 function AccountsLinktBank() {
-  const { user, getAccessTokenSilently } = useAuth0();
-  const [formData, updateFormData] = useState(initialFormData);
+  const { getAccessTokenSilently } = useAuth0();
+  const [formData, setFormData] = useState(initialFormData);
+  const [formStatus, setFormStatus] = useState(null);
+
 
   const handleChange = (e) => {
-    updateFormData({
+    setFormData({
       ...formData,
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
@@ -48,9 +50,11 @@ function AccountsLinktBank() {
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
+            setFormStatus(json?.message);
           });
       } catch (e) {
         console.error(e.message);
+        setFormStatus(e.message);
       }
     };
 
@@ -78,9 +82,11 @@ function AccountsLinktBank() {
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
+            setFormStatus(json?.message);
           });
       } catch (e) {
         console.error(e.message);
+        setFormStatus(e.message);
       }
     };
 
@@ -128,6 +134,9 @@ function AccountsLinktBank() {
                   </h2>
                   <div className="columns">
                     <div className="column">
+                      <div className="notification">
+                        Form status text. <code>{formStatus}</code>
+                      </div>
                       <div className="field">
                         <label className="label" htmlFor="userId">
                           User ID
