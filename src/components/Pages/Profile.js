@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-
-export const API_URL = "https://api.is452.cloud";
-// export const API_URL = "http://localhost:5000";
+import { API_URL } from "../../utils/utils";
 
 function Profile() {
   const { user, getAccessTokenSilently } = useAuth0();

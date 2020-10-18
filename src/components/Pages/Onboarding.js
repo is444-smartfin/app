@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import JWTDecode from "jwt-decode";
-
-export const API_URL = "https://api.is452.cloud";
-// export const API_URL = "http://localhost:5000";
+import { API_URL } from "../../utils/utils";
 
 const initialFormData = Object.freeze({
   name: "",
@@ -13,7 +10,6 @@ function Onboarding() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
-  const jwtClaims = JWTDecode(token);
   // console.log(jwtClaims);
 
   const [formData, updateFormData] = useState(initialFormData);
@@ -31,7 +27,7 @@ function Onboarding() {
 
     // Set final post data to include email, not very secure but ok
     // Should send bearer token instead, then check serverside!
-    const data = { ...formData, email: jwtClaims.email };
+    const data = { ...formData, token };
 
     // Post to API
     console.log(data);
@@ -39,12 +35,13 @@ function Onboarding() {
       method: "POST",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     }).then((response) => console.log(response));
     const state = params.get("state");
-    window.location.href = `https://is452.us.auth0.com/continue?state=${state}`;
+    // window.location.href = `https://is452.us.auth0.com/continue?state=${state}`;
   };
 
   return (

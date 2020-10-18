@@ -12,8 +12,8 @@ ReactDOM.render(
       domain="smu-digibank.us.auth0.com"
       clientId="q7COjT7tlDgn8zKeYveAd2Hrfjo4fBLi"
       redirectUri={window.location.origin}
-      audience="https://ourfin.tech/"
-      scope="read:profile write:profile read:bids create:bids"
+      audience="https://api.ourfin.tech/"
+      scope="read:profile write:profile read:tbank write:tbank"
     >
       <App />
     </Auth0Provider>

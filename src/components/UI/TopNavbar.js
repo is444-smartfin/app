@@ -47,7 +47,7 @@ function TopNavbar() {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
-            dApp
+            FinTech Startup
           </Link>
           <Link to="/" className="navbar-burger burger" />
         </div>
@@ -58,9 +58,6 @@ function TopNavbar() {
             </Link>
             <Link to="/stuff" className="navbar-item">
               Stuff
-            </Link>
-            <Link to="/stocks" className="navbar-item">
-              Stocks
             </Link>
             <Link to="/profile" className="navbar-item">
               Profile

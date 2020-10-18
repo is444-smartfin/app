@@ -17,11 +17,10 @@ function Home() {
       <section className="hero is-dark mb-4">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">Make Insurance Fair and Accessible</h1>
-            <p>
-              Decentralized insurance protocol to collectively build insurance
-              products.
-            </p>
+            <h1 className="title">
+              Singapore’s Biggest Personal Finance Platform
+            </h1>
+            <p>Help your personalize your finances smartly.</p>
           </div>
         </div>
       </section>
