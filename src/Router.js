@@ -7,6 +7,7 @@ import Profile from "./components/Pages/Profile";
 import Onboarding from "./components/Pages/Onboarding";
 import AccountsLink from "./components/Pages/AccountsLink";
 import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
+import Accounts from "./components/Pages/Accounts";
 
 export default function Router() {
   return (
@@ -30,6 +31,7 @@ export default function Router() {
             path="/accounts/link/tbank"
             component={AccountsLinktBank}
           />
+          <ProtectedRoute exact path="/accounts" component={Accounts} />
 
           <Route path="/onboarding" component={Onboarding} />
         </Switch>

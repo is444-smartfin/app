@@ -13,7 +13,7 @@ const cardFooter = {
   marginTop: "auto",
 };
 
-function AccountsLink() {
+function Accounts() {
   const { user, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
 
@@ -45,7 +45,7 @@ function AccountsLink() {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">My accounts</h1>
-            <h2 className="subtitle">Link your banks accounts</h2>
+            <h2 className="subtitle">View all my linked accounts</h2>
           </div>
         </div>
       </section>
@@ -56,12 +56,12 @@ function AccountsLink() {
               <p className="menu-label">Integration</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/accounts">View All Accounts</Link>
+                  <Link to="/accounts" className="is-active">
+                    View All Accounts
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/accounts/link" className="is-active">
-                    Link Accounts
-                  </Link>
+                  <Link to="/accounts/link">Link Accounts</Link>
                 </li>
               </ul>
             </aside>
@@ -76,59 +76,17 @@ function AccountsLink() {
                       alt="tBank Logo"
                       className="image is-24x24 is-inline-block"
                     />{" "}
-                    tBank
+                    {userMetadata?.accounts[0].bank}
                   </h2>
-                  Link your tBank Account
+                  You linked your tBank account{" "}
+                  <code>{userMetadata?.accounts[0].userId}</code> with us on 1
+                  Oct 2020.
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
                 <Link to="/accounts/link/tbank" className="card-footer-item">
-                  Link
+                  Disconnect
                 </Link>
-              </footer>
-            </div>
-          </div>
-          <div className="column">
-            <div className="card" style={cardEqualHeight}>
-              <div className="card-content">
-                <div className="content">
-                  <h2>
-                    <img
-                      src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
-                      alt="tBank Logo"
-                      className="image is-24x24 is-inline-block"
-                    />{" "}
-                    DBS
-                  </h2>
-                  Coming Soon
-                </div>
-              </div>
-              <footer className="card-footer" style={cardFooter}>
-                <span className="card-footer-item" disabled>
-                  Coming Soon
-                </span>
-              </footer>
-            </div>
-          </div>
-          <div className="column">
-            <div className="card" style={cardEqualHeight}>
-              <div className="card-content">
-                <div className="content">
-                  <h2>
-                    <img
-                      src="https://www.stashaway.sg/static/stashaway-icon-1796d56ee76309af75c4398bfa167ca1.png"
-                      alt="StashAway Logo"
-                      className="image is-24x24 is-inline-block"
-                    />{" "}
-                    StashAway
-                  </h2>
-                  Coming Soon
-                </div>
-              </div>
-              <footer className="card-footer" style={cardFooter}>
-                <span className="card-footer-item" disabled>
-                  Coming Soon
-                </span>
               </footer>
             </div>
           </div>
@@ -138,4 +96,4 @@ function AccountsLink() {
   );
 }
 
-export default AccountsLink;
+export default Accounts;
