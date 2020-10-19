@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../utils/utils";
 
 const cardEqualHeight = {
   display: "flex",
@@ -15,27 +17,59 @@ const imageVerticalAlign = {
   verticalAlign: "middle",
 };
 
-function Home() {
+function Recipes() {
+  const { user, getAccessTokenSilently } = useAuth0();
+  const [userMetadata, setUserMetadata] = useState(null);
+
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+        const userDetails = `${API_URL}/accounts/info`;
+        console.log(accessToken);
+        const metadataResponse = await fetch(userDetails, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const metadata = await metadataResponse.json();
+        setUserMetadata(metadata);
+        console.log(metadata);
+      } catch (e) {
+        console.error(e.message);
+      }
+    };
+
+    getUserMetadata();
+  }, [getAccessTokenSilently, user]);
+
   return (
-    <>
+    <div>
       <section className="hero is-dark mb-4">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">
-              Do more with the things you{" "}
-              <span role="img" aria-label="love">
-                ❤️
-              </span>
-            </h1>
-            <p>
-              Helping you personalize your finances smartly, in new and
-              remarkable ways.
-            </p>
+            <h1 className="title">Explore recipes</h1>
+            <h2 className="subtitle">You can </h2>
           </div>
         </div>
       </section>
-      <div className="container is-fluid">
+      <div className="container">
         <div className="columns">
+          <div className="column is-2">
+            <aside className="menu">
+              <p className="menu-label">Integration</p>
+              <ul className="menu-list">
+                <li>
+                  <Link to="/accounts" className="is-active">
+                    View All Accounts
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/accounts/link">Link Accounts</Link>
+                </li>
+              </ul>
+            </aside>
+          </div>
           <div className="column">
             <div className="card" style={cardEqualHeight}>
               <div className="card-content">
@@ -117,8 +151,8 @@ function Home() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Home;
+export default Recipes;

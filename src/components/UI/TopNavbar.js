@@ -42,6 +42,11 @@ function LogoutButton() {
 }
 
 function TopNavbar() {
+  const [mobileNavbarIsActive, setMobileNavbarIsActive] = React.useState(false);
+  function toggleBurgerMenu() {
+    setMobileNavbarIsActive(!mobileNavbarIsActive); // toggle
+    document.querySelector(".navbar-menu").classList.toggle("is-active");
+  }
   return (
     <>
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -49,15 +54,31 @@ function TopNavbar() {
           <Link to="/" className="navbar-item">
             FinTech Startup
           </Link>
-          <Link to="/" className="navbar-burger burger" />
+          <button
+            type="button"
+            aria-label="menu"
+            aria-expanded="false"
+            className={`button is-text navbar-burger burger ${
+              mobileNavbarIsActive ? "is-active" : ""
+            }`}
+            data-target="navbarBasicExample"
+            onClick={toggleBurgerMenu}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
             <Link to="/" className="navbar-item">
               Home
             </Link>
-            <Link to="/accounts/link" className="navbar-item">
+            <Link to="/accounts" className="navbar-item">
               Accounts
+            </Link>
+            <Link to="/recipes" className="navbar-item">
+              Recipes
             </Link>
             <Link to="/profile" className="navbar-item">
               Profile

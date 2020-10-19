@@ -15,7 +15,7 @@ const cardFooter = {
 
 function Accounts() {
   const { user, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
+  const [userMetadata, setUserMetadata] = useState([]);
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -67,28 +67,45 @@ function Accounts() {
             </aside>
           </div>
           <div className="column">
-            <div className="card" style={cardEqualHeight}>
-              <div className="card-content">
-                <div className="content">
-                  <h2>
-                    <img
-                      src="https://tbankonline.com/img/tBank.ico"
-                      alt="tBank Logo"
-                      className="image is-24x24 is-inline-block"
-                    />{" "}
-                    {userMetadata?.accounts[0].bank}
-                  </h2>
-                  You linked your tBank account{" "}
-                  <code>{userMetadata?.accounts[0].userId}</code> with us on 1
-                  Oct 2020.
+            {userMetadata?.accounts?.length > 0 ||
+            "accounts" in userMetadata ? (
+              <div className="card" style={cardEqualHeight}>
+                <div className="card-content">
+                  <div className="content">
+                    <h2>
+                      <img
+                        src="https://tbankonline.com/img/tBank.ico"
+                        alt="tBank Logo"
+                        className="image is-24x24 is-inline-block"
+                      />{" "}
+                      {userMetadata?.accounts[0].bank}
+                    </h2>
+                    You linked your tBank account{" "}
+                    <code>{userMetadata?.accounts[0].userId}</code> with us on 1
+                    Oct 2020.
+                  </div>
                 </div>
+                <footer className="card-footer" style={cardFooter}>
+                  <Link to="/accounts/link/tbank" className="card-footer-item">
+                    Disconnect
+                  </Link>
+                </footer>
               </div>
-              <footer className="card-footer" style={cardFooter}>
-                <Link to="/accounts/link/tbank" className="card-footer-item">
-                  Disconnect
-                </Link>
-              </footer>
-            </div>
+            ) : (
+              <div className="card" style={cardEqualHeight}>
+                <div className="card-content">
+                  <div className="content">
+                    <h2>Oh no!</h2>
+                    You do not have any accounts linked.
+                  </div>
+                </div>
+                <footer className="card-footer" style={cardFooter}>
+                  <Link to="/accounts/link" className="card-footer-item">
+                    Why not take a look at what accounts you can link?
+                  </Link>
+                </footer>
+              </div>
+            )}
           </div>
         </div>
       </div>

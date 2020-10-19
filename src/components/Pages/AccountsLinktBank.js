@@ -20,7 +20,6 @@ function AccountsLinktBank() {
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
 
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -110,12 +109,12 @@ function AccountsLinktBank() {
               <p className="menu-label">Integration</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/accounts" className="is-active">
-                    Link Accounts
-                  </Link>
+                  <Link to="/accounts">View All Accounts</Link>
                 </li>
                 <li>
-                  <Link to="/profile">View All Accounts</Link>
+                  <Link to="/accounts/link" className="is-active">
+                    Link Accounts
+                  </Link>
                 </li>
               </ul>
             </aside>
