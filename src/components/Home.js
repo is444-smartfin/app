@@ -34,7 +34,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <div className="container is-fluid">
+      <section className="section is-fluid">
         <div className="columns">
           <div className="column">
             <div className="card" style={cardEqualHeight}>
@@ -116,7 +116,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

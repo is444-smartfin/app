@@ -37,7 +37,7 @@ function Profile() {
           </div>
         </div>
       </section>
-      <div className="container">
+      <section className="section">
         <div className="columns">
           <div className="column is-3">
             <aside className="menu">
@@ -69,7 +69,7 @@ function Profile() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

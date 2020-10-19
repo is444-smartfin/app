@@ -53,19 +53,19 @@ function Recipes() {
           </div>
         </div>
       </section>
-      <div className="container">
+      <section className="section">
         <div className="columns">
           <div className="column is-2">
             <aside className="menu">
-              <p className="menu-label">Integration</p>
+              <p className="menu-label">Partners</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/accounts" className="is-active">
-                    View All Accounts
+                  <Link to="/recipes" className="is-active">
+                    All
                   </Link>
                 </li>
                 <li>
-                  <Link to="/accounts/link">Link Accounts</Link>
+                  <Link to="/recipes">tBank</Link>
                 </li>
               </ul>
             </aside>
@@ -150,7 +150,7 @@ function Recipes() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

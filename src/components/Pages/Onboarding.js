@@ -52,7 +52,7 @@ function Onboarding() {
           </div>
         </div>
       </section>
-      <div className="container">
+      <section className="section">
         <div className="columns">
           <div className="column">
             <div className="field">
@@ -101,7 +101,7 @@ function Onboarding() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

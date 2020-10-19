@@ -49,7 +49,7 @@ function AccountsLink() {
           </div>
         </div>
       </section>
-      <div className="container">
+      <section className="section">
         <div className="columns">
           <div className="column is-2">
             <aside className="menu">
@@ -133,7 +133,7 @@ function AccountsLink() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
