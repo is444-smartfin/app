@@ -100,7 +100,29 @@ function AccountsLink() {
                     />{" "}
                     DBS
                   </h2>
-                  DBS Coming Soon
+                  Coming Soon
+                </div>
+              </div>
+              <footer className="card-footer" style={cardFooter}>
+                <span className="card-footer-item" disabled>
+                  Coming Soon
+                </span>
+              </footer>
+            </div>
+          </div>
+          <div className="column">
+            <div className="card" style={cardEqualHeight}>
+              <div className="card-content">
+                <div className="content">
+                  <h2>
+                    <img
+                      src="https://www.stashaway.sg/static/stashaway-icon-1796d56ee76309af75c4398bfa167ca1.png"
+                      alt="StashAway Logo"
+                      className="image is-24x24 is-inline-block"
+                    />{" "}
+                    StashAway
+                  </h2>
+                  Coming Soon
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
