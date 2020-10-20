@@ -112,7 +112,7 @@ function RecipesAddSalary() {
                   <Link to="/recipes">View All Recipes</Link>
                 </li>
                 <li>
-                  <Link to="/recipes/link" className="is-active">
+                  <Link to="/recipes" className="is-active">
                     Add Recipes
                   </Link>
                 </li>

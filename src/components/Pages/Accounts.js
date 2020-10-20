@@ -59,22 +59,6 @@ function Accounts() {
       </>
     );
   }
-  function AccountFooterButton({ name }) {
-    return (
-      <>
-        {/* <Link to="/accounts/link/tbank" className="card-footer-item">
-          Disconnect
-        </Link> */}
-        <span
-          role="button"
-          className="card-footer-item"
-          onClick={async () => await handleDisconnect(name)}
-        >
-          Disconnect
-        </span>
-      </>
-    );
-  }
 
   async function handleDisconnect(name) {
     try {
@@ -96,6 +80,20 @@ function Accounts() {
     }
   }
 
+  function AccountFooterButton({ name }) {
+    return (
+      <>
+        <Link
+          to="/accounts"
+          role="button"
+          className="card-footer-item"
+          onClick={async () => handleDisconnect(name)}
+        >
+          Disconnect
+        </Link>
+      </>
+    );
+  }
   // Destructuring to get accounts only
   function AccountsList({ accounts }) {
     if (Object.keys(accounts).length > 0) {

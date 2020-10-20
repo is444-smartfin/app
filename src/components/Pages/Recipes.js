@@ -49,7 +49,10 @@ function Recipes() {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">Explore recipes</h1>
-            <h2 className="subtitle">You can </h2>
+            <h2 className="subtitle">
+              Find ways for us to handle repetitive tasks in the banking apps
+              you use everyday.
+            </h2>
           </div>
         </div>
       </section>
@@ -63,9 +66,6 @@ function Recipes() {
                   <Link to="/recipes" className="is-active">
                     View All Recipes
                   </Link>
-                </li>
-                <li>
-                  <Link to="/recipes/link">Add Recipes</Link>
                 </li>
               </ul>
             </aside>
