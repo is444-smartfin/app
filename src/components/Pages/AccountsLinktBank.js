@@ -172,6 +172,7 @@ function AccountsLinktBank() {
                             inputMode="numeric"
                             maxLength="6"
                             onChange={handleChange}
+                            autoComplete="one-time-code"
                           />
                         </div>
                         <div className="control">
