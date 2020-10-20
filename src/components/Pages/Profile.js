@@ -29,7 +29,7 @@ function Profile() {
 
   return (
     <div>
-      <section className="hero is-dark mb-4">
+      <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
             <h1 className="title">Profile of {userMetadata?.full_name}</h1>

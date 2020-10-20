@@ -47,6 +47,10 @@ function TopNavbar() {
     setMobileNavbarIsActive(!mobileNavbarIsActive); // toggle
     document.querySelector(".navbar-menu").classList.toggle("is-active");
   }
+  function offBurgerMenu() {
+    setMobileNavbarIsActive(false);
+    document.querySelector(".navbar-menu").classList.remove("is-active");
+  }
   return (
     <>
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -71,16 +75,20 @@ function TopNavbar() {
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/" className="navbar-item">
+            <Link to="/" className="navbar-item" onClick={offBurgerMenu}>
               Home
             </Link>
-            <Link to="/accounts" className="navbar-item">
+            <Link
+              to="/accounts"
+              className="navbar-item"
+              onClick={offBurgerMenu}
+            >
               Accounts
             </Link>
-            <Link to="/recipes" className="navbar-item">
+            <Link to="/recipes" className="navbar-item" onClick={offBurgerMenu}>
               Recipes
             </Link>
-            <Link to="/profile" className="navbar-item">
+            <Link to="/profile" className="navbar-item" onClick={offBurgerMenu}>
               Profile
             </Link>
           </div>
