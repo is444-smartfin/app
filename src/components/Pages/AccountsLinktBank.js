@@ -32,7 +32,6 @@ function AccountsLinktBank() {
   const handleRequestOtp = () => {
     // e.preventDefault();
     const data = { ...formData, bank: "tbank" };
-    console.log(data);
 
     const requestOtp = async () => {
       try {
@@ -48,7 +47,6 @@ function AccountsLinktBank() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {

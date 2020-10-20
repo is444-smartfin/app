@@ -28,77 +28,15 @@ function RecipesAddSalary() {
     });
   };
 
-  // Step 1: Request OTP
-  const handleRequestOtp = () => {
-    // e.preventDefault();
-    const data = { ...formData };
-    console.log(data);
-
-    const requestOtp = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/mfa`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-            setFormStatus(json?.message);
-          });
-      } catch (e) {
-        console.error(e.message);
-        setFormStatus(e.message);
-      }
-    };
-
-    requestOtp();
-  };
-
-  // Step 2: Link account
-  const handleSubmit = () => {
-    // e.preventDefault();
-    const data = { ...formData };
-    console.log(data);
-
-    const requestAccountLinkage = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/link`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-            setFormStatus(json?.message);
-          });
-      } catch (e) {
-        console.error(e.message);
-        setFormStatus(e.message);
-      }
-    };
-
-    requestAccountLinkage();
-  };
-
   return (
     <div>
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">Link tBank Account</h1>
-            <h2 className="subtitle">You&rsquo;re almost there!</h2>
+            <h1 className="title">
+              💰 Save 30% of my salary to another account
+            </h1>
+            <h2 className="subtitle">Powered by tBank</h2>
           </div>
         </div>
       </section>
@@ -123,14 +61,6 @@ function RecipesAddSalary() {
             <div className="card" style={cardEqualHeight}>
               <div className="card-content">
                 <div className="content">
-                  <h2>
-                    <img
-                      src="https://tbankonline.com/img/tBank.ico"
-                      alt="tBank Logo"
-                      className="image is-24x24 is-inline-block"
-                    />{" "}
-                    tBank
-                  </h2>
                   <div className="columns">
                     <div className="column">
                       <div className="notification">
@@ -138,10 +68,10 @@ function RecipesAddSalary() {
                       </div>
                       <div className="field">
                         <label className="label" htmlFor="userId">
-                          User ID
+                          From account number
                           <input
                             className="control input"
-                            name="userId"
+                            name="from"
                             type="text"
                             placeholder=""
                             onChange={handleChange}
@@ -151,51 +81,21 @@ function RecipesAddSalary() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          PIN
+                          To account number
                           <input
                             className="control input"
-                            name="pin"
-                            type="password"
+                            name="to"
+                            type="text"
                             placeholder=""
                             onChange={handleChange}
                           />
                         </label>
                       </div>
 
-                      <label className="label" id="otp" htmlFor="otp">
-                        OTP
-                      </label>
-                      <div className="field has-addons">
-                        <div className="control">
-                          <input
-                            className="control input"
-                            name="otp"
-                            type="text"
-                            pattern="[0-9]*"
-                            inputMode="numeric"
-                            maxLength="6"
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="control">
-                          <button
-                            type="button"
-                            className="button is-info"
-                            onClick={() => handleRequestOtp()}
-                          >
-                            Request OTP
-                          </button>
-                        </div>
-                      </div>
-
                       <div className="field is-grouped">
                         <div className="control">
-                          <button
-                            type="submit"
-                            className="button is-link"
-                            onClick={() => handleSubmit()}
-                          >
-                            Login
+                          <button type="submit" className="button is-link">
+                            Add
                           </button>
                         </div>
                       </div>
