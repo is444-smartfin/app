@@ -29,7 +29,6 @@ function Recipes() {
       try {
         const accessToken = await getAccessTokenSilently();
         const userDetails = `${API_URL}/accounts/info`;
-        console.log(accessToken);
         const metadataResponse = await fetch(userDetails, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -38,7 +37,6 @@ function Recipes() {
         });
         const metadata = await metadataResponse.json();
         setUserMetadata(metadata);
-        console.log(metadata);
       } catch (e) {
         console.error(e.message);
       }

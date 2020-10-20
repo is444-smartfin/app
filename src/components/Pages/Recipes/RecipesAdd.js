@@ -32,7 +32,6 @@ function RecipesAdd() {
   const handleRequestOtp = () => {
     // e.preventDefault();
     const data = { ...formData };
-    console.log(data);
 
     const requestOtp = async () => {
       try {
@@ -48,7 +47,6 @@ function RecipesAdd() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {
@@ -64,7 +62,6 @@ function RecipesAdd() {
   const handleSubmit = () => {
     // e.preventDefault();
     const data = { ...formData };
-    console.log(data);
 
     const requestAccountLinkage = async () => {
       try {
@@ -80,11 +77,9 @@ function RecipesAdd() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {
-        console.error(e.message);
         setFormStatus(e.message);
       }
     };

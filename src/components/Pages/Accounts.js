@@ -83,7 +83,6 @@ function Accounts() {
         body: JSON.stringify({ name }),
       });
       const data = await response.json();
-      console.log(data);
     } catch (e) {
       console.error(e.message);
     }
