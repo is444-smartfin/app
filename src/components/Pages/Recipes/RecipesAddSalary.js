@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../../utils/utils";
@@ -19,6 +19,7 @@ function RecipesAddSalary() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
+  const [accountsList, setAccountsList] = useState([]);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,11 +29,41 @@ function RecipesAddSalary() {
     });
   };
 
+  useEffect(() => {
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    const getUserMetadata = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+        const apiUrl = `${API_URL}/integrations/tbank/user_accounts`;
+        const response = await fetch(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          signal,
+        });
+        const data = await response.json();
+        setAccountsList(data.data);
+      } catch (e) {
+        console.error(e.message);
+      }
+    };
+
+    getUserMetadata();
+
+    // Need to unsubscribe to API calls if the user moves away from the page before fetch() is done
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [getAccessTokenSilently]);
+
   return (
     <div>
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
+            {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
             <h1 className="title">
               💰 Save 30% of my salary to another account
             </h1>
@@ -69,25 +100,75 @@ function RecipesAddSalary() {
                       <div className="field">
                         <label className="label" htmlFor="userId">
                           From account number
-                          <input
-                            className="control input"
-                            name="from"
-                            type="text"
-                            placeholder=""
-                            onChange={handleChange}
-                          />
+                          <div className="control">
+                            <div className="select">
+                              <select>
+                                {accountsList.length > 0 ? (
+                                  <>
+                                    {Object.values(accountsList).map((row) => (
+                                      <option
+                                        value={row.accountID}
+                                        key={row.accountID}
+                                      >
+                                        {row.accountID} ({row.currency}{" "}
+                                        {row.balance})
+                                      </option>
+                                    ))}
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
+                            </div>
+                          </div>
                         </label>
                       </div>
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
                           To account number
+                          <div className="control">
+                            <div className="select">
+                              <select>
+                                {accountsList.length > 0 ? (
+                                  <>
+                                    {Object.values(accountsList).map((row) => (
+                                      <option
+                                        value={row.accountID}
+                                        key={row.accountID}
+                                      >
+                                        {row.accountID} ({row.currency}{" "}
+                                        {row.balance})
+                                      </option>
+                                    ))}
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="pin">
+                          When a transaction contains
                           <input
-                            className="control input"
-                            name="to"
                             type="text"
-                            placeholder=""
-                            onChange={handleChange}
+                            className="input control"
+                            defaultValue="SALARY"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="pin">
+                          % of incoming amount to transfer
+                          <input
+                            type="number"
+                            className="input control"
+                            defaultValue="30"
                           />
                         </label>
                       </div>
