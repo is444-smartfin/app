@@ -32,7 +32,6 @@ function RecipesAddSalary() {
   const handleRequestOtp = () => {
     // e.preventDefault();
     const data = { ...formData };
-    console.log(data);
 
     const requestOtp = async () => {
       try {
@@ -48,11 +47,9 @@ function RecipesAddSalary() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {
-        console.error(e.message);
         setFormStatus(e.message);
       }
     };
@@ -64,7 +61,6 @@ function RecipesAddSalary() {
   const handleSubmit = () => {
     // e.preventDefault();
     const data = { ...formData };
-    console.log(data);
 
     const requestAccountLinkage = async () => {
       try {
@@ -80,7 +76,6 @@ function RecipesAddSalary() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {
