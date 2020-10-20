@@ -18,8 +18,8 @@ function Profile() {
         const metadataResponse = await fetch(userDetails, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            signal,
           },
+          signal,
         });
         const metadata = await metadataResponse.json();
         setUserMetadata(metadata);

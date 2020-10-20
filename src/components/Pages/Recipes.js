@@ -18,38 +18,6 @@ const imageVerticalAlign = {
 };
 
 function Recipes() {
-  const { user, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const { signal } = abortController;
-
-    const getUserMetadata = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        const userDetails = `${API_URL}/accounts/info`;
-        const metadataResponse = await fetch(userDetails, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            signal,
-          },
-        });
-        const metadata = await metadataResponse.json();
-        setUserMetadata(metadata);
-      } catch (e) {
-        console.error(e.message);
-      }
-    };
-
-    getUserMetadata();
-  
-    // Need to unsubscribe to API calls if the user moves away from the page before fetch() is done
-    return function cleanup() {
-      abortController.abort();
-    };
-  }, [getAccessTokenSilently, user]);
-
   return (
     <div>
       <section className="hero is-dark">
