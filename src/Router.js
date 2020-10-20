@@ -9,6 +9,8 @@ import AccountsLink from "./components/Pages/AccountsLink";
 import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
 import Accounts from "./components/Pages/Accounts";
 import Recipes from "./components/Pages/Recipes";
+import RecipesAdd from "./components/Pages/Recipes/RecipesAdd";
+import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
 
 export default function Router() {
   return (
@@ -35,6 +37,12 @@ export default function Router() {
           <ProtectedRoute exact path="/accounts" component={Accounts} />
 
           <ProtectedRoute exact path="/recipes" component={Recipes} />
+          <ProtectedRoute exact path="/recipes/add" component={RecipesAdd} />
+          <ProtectedRoute
+            exact
+            path="/recipes/add/salary"
+            component={RecipesAddSalary}
+          />
 
           <Route path="/onboarding" component={Onboarding} />
         </Switch>

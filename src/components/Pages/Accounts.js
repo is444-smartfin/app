@@ -23,7 +23,6 @@ function Accounts() {
       try {
         const accessToken = await getAccessTokenSilently();
         const userDetails = `${API_URL}/accounts/info`;
-        console.log(accessToken);
         const metadataResponse = await fetch(userDetails, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -31,7 +30,6 @@ function Accounts() {
         });
         const metadata = await metadataResponse.json();
         setUserMetadata(metadata);
-        console.log(metadata);
       } catch (e) {
         console.error(e.message);
       }
@@ -40,47 +38,106 @@ function Accounts() {
     getUserMetadata();
   }, [getAccessTokenSilently, user]);
 
-  function AccountsList() {
+  // TODO: Make it dynamic
+  function AccountName({ name }) {
     return (
       <>
-        {userMetadata?.accounts?.length > 0 || "accounts" in userMetadata ? (
-          <div className="card" style={cardEqualHeight}>
-            <div className="card-content">
-              <div className="content">
-                <h2>
-                  <img
-                    src="https://tbankonline.com/img/tBank.ico"
-                    alt="tBank Logo"
-                    className="image is-24x24 is-inline-block"
-                  />{" "}
-                  {userMetadata?.accounts[0].bank}
-                </h2>
-                You linked your tBank account{" "}
-                <code>{userMetadata?.accounts[0].userId}</code> with us on 1 Oct
-                2020.
+        <img
+          src="https://tbankonline.com/img/tBank.ico"
+          alt="tBank Logo"
+          className="image is-24x24 is-inline-block"
+        />{" "}
+        {name}
+      </>
+    );
+  }
+  function AccountContext({ account }) {
+    return (
+      <>
+        You linked your tBank account <code>{account}</code> with us on 1 Oct
+        2020.
+      </>
+    );
+  }
+  function AccountFooterButton({ name }) {
+    return (
+      <>
+        {/* <Link to="/accounts/link/tbank" className="card-footer-item">
+          Disconnect
+        </Link> */}
+        <span
+          role="button"
+          className="card-footer-item"
+          onClick={async () => await handleDisconnect(name)}
+        >
+          Disconnect
+        </span>
+      </>
+    );
+  }
+
+  async function handleDisconnect(name) {
+    try {
+      const accessToken = await getAccessTokenSilently();
+      const apiUrl = `${API_URL}/accounts/unlink`;
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (e) {
+      console.error(e.message);
+    }
+  }
+
+  // Destructuring to get accounts only
+  function AccountsList({ accounts }) {
+    if (Object.keys(accounts).length > 0) {
+      return (
+        <>
+          {Object.keys(accounts).map((name) => {
+            const account = accounts[name].userId;
+
+            return (
+              <div className="card" style={cardEqualHeight} key={name}>
+                <div className="card-content">
+                  <div className="content">
+                    <h2>
+                      <AccountName name={name} />
+                    </h2>
+                    <AccountContext account={account} />
+                  </div>
+                </div>
+                <footer className="card-footer" style={cardFooter}>
+                  <AccountFooterButton name={name} />
+                </footer>
               </div>
+            );
+          })}
+        </>
+      );
+    }
+    return (
+      <>
+        <div className="card" style={cardEqualHeight}>
+          <div className="card-content">
+            <div className="content">
+              <h2>Oh no!</h2>
+              You do not have any linked accounts.
             </div>
-            <footer className="card-footer" style={cardFooter}>
-              <Link to="/accounts/link/tbank" className="card-footer-item">
-                Disconnect
-              </Link>
-            </footer>
           </div>
-        ) : (
-          <div className="card" style={cardEqualHeight}>
-            <div className="card-content">
-              <div className="content">
-                <h2>Oh no!</h2>
-                You do not have any accounts linked.
-              </div>
-            </div>
-            <footer className="card-footer" style={cardFooter}>
-              <Link to="/accounts/link" className="card-footer-item">
-                Why not take a look at what accounts you can link?
-              </Link>
-            </footer>
-          </div>
-        )}
+          <footer className="card-footer" style={cardFooter}>
+            <Link to="/accounts/link" className="card-footer-item">
+              Why not take a look at what accounts you can link?
+            </Link>
+          </footer>
+        </div>
       </>
     );
   }
@@ -114,7 +171,7 @@ function Accounts() {
           </div>
           <div className="column">
             {userMetadata ? (
-              <AccountsList />
+              <AccountsList accounts={userMetadata?.accounts} />
             ) : (
               <>
                 <Skeleton

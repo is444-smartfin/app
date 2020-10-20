@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../utils/utils";
 
 const cardEqualHeight = {
   display: "flex",
@@ -14,31 +12,6 @@ const cardFooter = {
 };
 
 function AccountsLink() {
-  const { user, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
-
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        const userDetails = `${API_URL}/accounts/info`;
-        console.log(accessToken);
-        const metadataResponse = await fetch(userDetails, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        const metadata = await metadataResponse.json();
-        setUserMetadata(metadata);
-        console.log(metadata);
-      } catch (e) {
-        console.error(e.message);
-      }
-    };
-
-    getUserMetadata();
-  }, [getAccessTokenSilently, user]);
-
   return (
     <div>
       <section className="hero is-dark">

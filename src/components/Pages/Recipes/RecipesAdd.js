@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../utils/utils";
+import { API_URL } from "../../../utils/utils";
 
 const cardEqualHeight = {
   display: "flex",
@@ -15,7 +15,7 @@ const initialFormData = Object.freeze({
   otp: "",
 });
 
-function AccountsLinktBank() {
+function RecipesAdd() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
@@ -106,14 +106,14 @@ function AccountsLinktBank() {
         <div className="columns">
           <div className="column is-2">
             <aside className="menu">
-              <p className="menu-label">Integration</p>
+              <p className="menu-label">Recipes</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/accounts">View All Accounts</Link>
+                  <Link to="/recipes">View All Recipes</Link>
                 </li>
                 <li>
-                  <Link to="/accounts/link" className="is-active">
-                    Link Accounts
+                  <Link to="/recipes/link" className="is-active">
+                    Add Recipes
                   </Link>
                 </li>
               </ul>
@@ -211,4 +211,4 @@ function AccountsLinktBank() {
   );
 }
 
-export default AccountsLinktBank;
+export default RecipesAdd;

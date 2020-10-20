@@ -61,11 +61,11 @@ function Recipes() {
               <ul className="menu-list">
                 <li>
                   <Link to="/recipes" className="is-active">
-                    All
+                    View All Recipes
                   </Link>
                 </li>
                 <li>
-                  <Link to="/recipes">tBank</Link>
+                  <Link to="/recipes/link">Add Recipes</Link>
                 </li>
               </ul>
             </aside>
@@ -90,7 +90,7 @@ function Recipes() {
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
+                <Link to="/recipes/add/salary" className="card-footer-item">
                   Connect
                 </Link>
               </footer>
