@@ -31,13 +31,13 @@ function AccountsLinktBank() {
   // Step 1: Request OTP
   const handleRequestOtp = () => {
     // e.preventDefault();
-    const data = { ...formData };
+    const data = { ...formData, bank: "tbank" };
     console.log(data);
 
     const requestOtp = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/mfa`, {
+        fetch(`${API_URL}/accounts/mfa`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -63,13 +63,12 @@ function AccountsLinktBank() {
   // Step 2: Link account
   const handleSubmit = () => {
     // e.preventDefault();
-    const data = { ...formData };
-    console.log(data);
+    const data = { ...formData, bank: "tbank" };
 
     const requestAccountLinkage = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/link`, {
+        fetch(`${API_URL}/accounts/link`, {
           method: "POST",
           headers: {
             Accept: "application/json",
