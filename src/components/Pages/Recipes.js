@@ -90,7 +90,7 @@ function Recipes() {
             </div>
           </div>
           <footer className="card-footer" style={cardFooter}>
-            <Link to="/accounts/link" className="card-footer-item">
+            <Link to="/recipes/explore" className="card-footer-item">
               Why not take a look at what recipes you create?
             </Link>
           </footer>
