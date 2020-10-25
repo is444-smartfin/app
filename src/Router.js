@@ -9,6 +9,7 @@ import AccountsLink from "./components/Pages/AccountsLink";
 import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
 import Accounts from "./components/Pages/Accounts";
 import Recipes from "./components/Pages/Recipes";
+import RecipesExplore from "./components/Pages/Recipes/RecipesExplore";
 import RecipesAdd from "./components/Pages/Recipes/RecipesAdd";
 import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
 
@@ -37,6 +38,11 @@ export default function Router() {
           <ProtectedRoute exact path="/accounts" component={Accounts} />
 
           <ProtectedRoute exact path="/recipes" component={Recipes} />
+          <ProtectedRoute
+            exact
+            path="/recipes/explore"
+            component={RecipesExplore}
+          />
           <ProtectedRoute exact path="/recipes/add" component={RecipesAdd} />
           <ProtectedRoute
             exact

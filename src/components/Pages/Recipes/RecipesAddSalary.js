@@ -10,9 +10,9 @@ const cardEqualHeight = {
 };
 
 const initialFormData = Object.freeze({
-  userId: "",
-  pin: "",
-  otp: "",
+  accountFrom: "",
+  accountTo: "",
+  amount: 30,
 });
 
 function RecipesAddSalary() {
@@ -27,6 +27,7 @@ function RecipesAddSalary() {
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
     });
+    console.log(e.target.name, e.target.value.trim());
   };
 
   useEffect(() => {
@@ -57,6 +58,37 @@ function RecipesAddSalary() {
       abortController.abort();
     };
   }, [getAccessTokenSilently]);
+
+  // Step 2: Link account
+  const handleSubmit = () => {
+    // e.preventDefault();
+    const data = { ...formData };
+
+    const postForm = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+        fetch(`${API_URL}/recipes/create`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            setFormStatus(json?.message);
+          });
+      } catch (e) {
+        console.error(e.message);
+        setFormStatus(e.message);
+      }
+    };
+
+    postForm();
+  };
 
   return (
     <div>
@@ -102,7 +134,15 @@ function RecipesAddSalary() {
                           From account number
                           <div className="control">
                             <div className="select">
-                              <select>
+                              <select
+                                name="accountFrom"
+                                onChange={handleChange}
+                                defaultValue=""
+                              >
+                                <option disabled value="">
+                                  {" "}
+                                  -- select an account --{" "}
+                                </option>
                                 {accountsList.length > 0 ? (
                                   <>
                                     {Object.values(accountsList).map((row) => (
@@ -129,7 +169,15 @@ function RecipesAddSalary() {
                           To account number
                           <div className="control">
                             <div className="select">
-                              <select>
+                              <select
+                                name="accountTo"
+                                onChange={handleChange}
+                                defaultValue=""
+                              >
+                                <option disabled value="">
+                                  {" "}
+                                  -- select an account --{" "}
+                                </option>
                                 {accountsList.length > 0 ? (
                                   <>
                                     {Object.values(accountsList).map((row) => (
@@ -153,29 +201,24 @@ function RecipesAddSalary() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          When a transaction contains
-                          <input
-                            type="text"
-                            className="input control"
-                            defaultValue="SALARY"
-                          />
-                        </label>
-                      </div>
-
-                      <div className="field">
-                        <label className="label" htmlFor="pin">
                           % of incoming amount to transfer
                           <input
                             type="number"
+                            name="amount"
                             className="input control"
-                            defaultValue="30"
+                            defaultValue={initialFormData.amount}
+                            onChange={handleChange}
                           />
                         </label>
                       </div>
 
                       <div className="field is-grouped">
                         <div className="control">
-                          <button type="submit" className="button is-link">
+                          <button
+                            type="submit"
+                            className="button is-link"
+                            onClick={handleSubmit}
+                          >
                             Add
                           </button>
                         </div>

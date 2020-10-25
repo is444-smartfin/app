@@ -103,9 +103,8 @@ function RecipesAdd() {
             <aside className="menu">
               <p className="menu-label">Recipes</p>
               <ul className="menu-list">
-                <li>
-                  <Link to="/recipes">View All Recipes</Link>
-                </li>
+                <Link to="/recipes">My Recipes</Link>
+                <Link to="/recipes/explore">Explore Recipes</Link>
                 <li>
                   <Link to="/recipes/link" className="is-active">
                     Add Recipes
