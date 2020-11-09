@@ -67,19 +67,19 @@ function AccountsLink() {
                 <div className="content">
                   <h2>
                     <img
-                      src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
-                      alt="tBank Logo"
+                      src="https://www.ocbc.com/favicon.ico"
+                      alt="OCBC Logo"
                       className="image is-24x24 is-inline-block"
                     />{" "}
-                    DBS
+                    OCBC
                   </h2>
-                  Coming Soon
+                  Link your OCBC account
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <span className="card-footer-item" disabled>
-                  Coming Soon
-                </span>
+                <Link to="/accounts/link/ocbc" className="card-footer-item">
+                  Link
+                </Link>
               </footer>
             </div>
           </div>
@@ -89,11 +89,11 @@ function AccountsLink() {
                 <div className="content">
                   <h2>
                     <img
-                      src="https://www.stashaway.sg/static/stashaway-icon-1796d56ee76309af75c4398bfa167ca1.png"
-                      alt="StashAway Logo"
+                      src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
+                      alt="tBank Logo"
                       className="image is-24x24 is-inline-block"
                     />{" "}
-                    StashAway
+                    DBS
                   </h2>
                   Coming Soon
                 </div>

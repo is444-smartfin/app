@@ -48,7 +48,19 @@ function Accounts() {
   }, [getAccessTokenSilently, user]);
 
   // TODO: Make it dynamic
-  function AccountName({ name }) {
+  function AccountBankName({ name }) {
+    if (name === "ocbc") {
+      return (
+        <>
+          <img
+            src="https://www.ocbc.com/favicon.ico"
+            alt="OCBC Logo"
+            className="image is-24x24 is-inline-block"
+          />{" "}
+          {name}
+        </>
+      );
+    }
     return (
       <>
         <img
@@ -60,10 +72,10 @@ function Accounts() {
       </>
     );
   }
-  function AccountContext({ account }) {
+  function AccountContext({ accountName }) {
     return (
       <>
-        You linked your tBank account <code>{account}</code> with us on 1 Oct
+        You linked your account <code>{accountName}</code> with us on 1 Oct
         2020.
       </>
     );
@@ -111,13 +123,13 @@ function Accounts() {
             const account = accounts[name].userId;
 
             return (
-              <div className="card" style={cardEqualHeight} key={name}>
+              <div className="card mb-4" key={name}>
                 <div className="card-content">
                   <div className="content">
                     <h2>
-                      <AccountName name={name} />
+                      <AccountBankName name={name} />
                     </h2>
-                    <AccountContext account={account} />
+                    <AccountContext accountName={account} />
                   </div>
                 </div>
                 <footer className="card-footer" style={cardFooter}>

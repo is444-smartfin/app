@@ -6,6 +6,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import Profile from "./components/Pages/Profile";
 import Onboarding from "./components/Pages/Onboarding";
 import AccountsLink from "./components/Pages/AccountsLink";
+import AccountsLinkOCBC from "./components/Pages/AccountsLinkOCBC";
 import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
 import Accounts from "./components/Pages/Accounts";
 import Recipes from "./components/Pages/Recipes";
@@ -34,6 +35,11 @@ export default function Router() {
             exact
             path="/accounts/link/tbank"
             component={AccountsLinktBank}
+          />
+          <ProtectedRoute
+            exact
+            path="/accounts/link/ocbc"
+            component={AccountsLinkOCBC}
           />
           <ProtectedRoute exact path="/accounts" component={Accounts} />
 
