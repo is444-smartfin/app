@@ -54,35 +54,50 @@ function Recipes() {
         <>
           {Object.keys(recipes).map((i) => {
             console.log(recipes[i]);
-            return (
-              <div
-                className="card"
-                style={cardEqualHeight}
-                key={recipes[i].task_name}
-              >
-                <div className="card-content">
-                  <div className="content">
-                    <h2>{recipes[i].task_name}</h2>
-                    <div>Creation time: {recipes[i].creation_time}</div>
-                    <div>Expiration time: {recipes[i].expiration_time}</div>
-                    <div>From account: {recipes[i].data.from}</div>
-                    <div>To account: {recipes[i].data.to}</div>
-                    <div>% to transfer: {recipes[i].data.amount}</div>
-                    <div>Schedule: {recipes[i].data.schedule}</div>
+            if (recipes[i].task_name === "tbank.salary.transfer") {
+              return (
+                <div className="card mb-4" key={recipes[i].task_name}>
+                  <div className="card-content">
+                    <div className="content">
+                      <h2>{recipes[i].task_name}</h2>
+                      <div>Creation time: {recipes[i].creation_time}</div>
+                      <div>Expiration time: {recipes[i].expiration_time}</div>
+                      <div>From account: {recipes[i].data.from}</div>
+                      <div>To account: {recipes[i].data.to}</div>
+                      <div>% to transfer: {recipes[i].data.amount}</div>
+                      <div>Schedule: {recipes[i].data.schedule}</div>
+                    </div>
                   </div>
+                  <footer className="card-footer" style={cardFooter}>
+                    <div className="card-footer-item">Delete</div>
+                  </footer>
                 </div>
-                <footer className="card-footer" style={cardFooter}>
-                  <div className="card-footer-item">Delete</div>
-                </footer>
-              </div>
-            );
+              );
+            }
+            if (recipes[i].task_name === "smartfin.aggregated_email") {
+              return (
+                <div className="card mb-4" key={recipes[i].task_name}>
+                  <div className="card-content">
+                    <div className="content">
+                      <h2>{recipes[i].task_name}</h2>
+                      <div>Creation time: {recipes[i].creation_time}</div>
+                      <div>Expiration time: {recipes[i].expiration_time}</div>
+                      <div>Schedule: {recipes[i].data.schedule}</div>
+                    </div>
+                  </div>
+                  <footer className="card-footer" style={cardFooter}>
+                    <div className="card-footer-item">Delete</div>
+                  </footer>
+                </div>
+              );
+            }
           })}
         </>
       );
     }
     return (
       <>
-        <div className="card" style={cardEqualHeight}>
+        <div className="card mb-4">
           <div className="card-content">
             <div className="content">
               <h2>Oh no!</h2>
