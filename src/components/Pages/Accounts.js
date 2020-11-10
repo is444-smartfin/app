@@ -57,7 +57,7 @@ function Accounts() {
             alt="OCBC Logo"
             className="image is-24x24 is-inline-block"
           />{" "}
-          {name}
+          OCBC
         </>
       );
     }
@@ -68,14 +68,14 @@ function Accounts() {
           alt="tBank Logo"
           className="image is-24x24 is-inline-block"
         />{" "}
-        {name}
+        tBank
       </>
     );
   }
   function AccountContext({ accountName }) {
     return (
       <>
-        You linked your account <code>{accountName}</code> with us on 1 Oct
+        You linked your account <code>{accountName}</code> with us on 17 Nov
         2020.
       </>
     );

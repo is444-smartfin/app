@@ -56,7 +56,7 @@ function TopNavbar() {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
-            FinTech Startup
+            SmartFIN
           </Link>
           <button
             type="button"

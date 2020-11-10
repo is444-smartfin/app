@@ -13,6 +13,8 @@ import Recipes from "./components/Pages/Recipes";
 import RecipesExplore from "./components/Pages/Recipes/RecipesExplore";
 import RecipesAdd from "./components/Pages/Recipes/RecipesAdd";
 import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
+import RecipesAddAggregatedEmail from "./components/Pages/Recipes/RecipesAddAggregatedEmail";
+
 
 export default function Router() {
   return (
@@ -54,6 +56,11 @@ export default function Router() {
             exact
             path="/recipes/add/salary"
             component={RecipesAddSalary}
+          />
+          <ProtectedRoute
+            exact
+            path="/recipes/add/aggregated_email"
+            component={RecipesAddAggregatedEmail}
           />
 
           <Route path="/onboarding" component={Onboarding} />

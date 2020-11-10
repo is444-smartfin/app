@@ -78,19 +78,16 @@ function RecipesExplore() {
                     <span role="img" aria-label="email">
                       📧{" "}
                     </span>
-                    Send me a weekly spending digest
+                    Send me a weekly aggregated transactions digest
                   </h2>
-                  <img
-                    src="https://tbankonline.com/img/tBank.ico"
-                    alt="tBank Logo"
-                    className="image is-16x16 is-inline-block"
-                    style={imageVerticalAlign}
-                  />{" "}
-                  tBank
+                  SmartFIN
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
+                <Link
+                  to="/recipes/add/aggregated_email"
+                  className="card-footer-item"
+                >
                   Connect
                 </Link>
               </footer>
