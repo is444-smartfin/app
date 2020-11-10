@@ -59,6 +59,13 @@ export default function Router() {
           <Route path="/onboarding" component={Onboarding} />
         </Switch>
       </div>
+      <footer>
+        <div className="content has-text-centered">
+          <p>
+            Build v1.0.0-{process.env.REACT_APP_COMMIT_REF?.substring(0, 6)}
+          </p>
+        </div>
+      </footer>
     </BrowserRouter>
   );
 }
