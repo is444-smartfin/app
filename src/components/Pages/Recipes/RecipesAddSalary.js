@@ -13,6 +13,7 @@ const initialFormData = Object.freeze({
   accountFrom: "",
   accountTo: "",
   amount: 30,
+  taskName: "tbank.salary.transfer",
 });
 
 function RecipesAddSalary() {
@@ -97,7 +98,7 @@ function RecipesAddSalary() {
           <div className="container">
             {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
             <h1 className="title">
-              💰 Save 30% of my salary to another account
+              💰 Save some of my salary to another account
             </h1>
             <h2 className="subtitle">Powered by tBank</h2>
           </div>
@@ -113,7 +114,7 @@ function RecipesAddSalary() {
                   <Link to="/recipes">View All Recipes</Link>
                 </li>
                 <li>
-                  <Link to="/recipes" className="is-active">
+                  <Link to="/recipes/explore" className="is-active">
                     Add Recipes
                   </Link>
                 </li>

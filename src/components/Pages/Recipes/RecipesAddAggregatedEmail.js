@@ -13,6 +13,7 @@ const initialFormData = Object.freeze({
   accountFrom: "",
   accountTo: "",
   amount: 30,
+  taskName: "smartfin.aggregated_email",
 });
 
 function RecipesAddAggregatedEmail() {
@@ -134,7 +135,7 @@ function RecipesAddAggregatedEmail() {
                       </div>
                       <div className="field">
                         <label className="label" htmlFor="userId">
-                          From account number
+                          Accounts (tBank)
                           <div className="control">
                             <div className="select">
                               <select
@@ -169,7 +170,7 @@ function RecipesAddAggregatedEmail() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          To account number
+                          Accounts (OCBC)
                           <div className="control">
                             <div className="select">
                               <select
@@ -204,7 +205,7 @@ function RecipesAddAggregatedEmail() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          % of incoming amount to transfer
+                          Amount to transfer
                           <input
                             type="number"
                             name="amount"

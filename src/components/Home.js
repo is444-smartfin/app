@@ -44,7 +44,7 @@ function Home() {
                     <span role="img" aria-label="money">
                       💰{" "}
                     </span>
-                    Save 30% of my salary to another account
+                    Save some of my salary to another account
                   </h2>
                   <img
                     src="https://tbankonline.com/img/tBank.ico"
