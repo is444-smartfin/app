@@ -116,7 +116,7 @@ function Accounts() {
   }
   // Destructuring to get accounts only
   function AccountsList({ accounts }) {
-    if (Object.keys(accounts).length > 0) {
+    if (accounts && Object.keys(accounts).length > 0) {
       return (
         <>
           {Object.keys(accounts).map((name) => {
