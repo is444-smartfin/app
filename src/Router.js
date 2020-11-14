@@ -14,6 +14,7 @@ import RecipesExplore from "./components/Pages/Recipes/RecipesExplore";
 import RecipesAdd from "./components/Pages/Recipes/RecipesAdd";
 import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
 import RecipesAddAggregatedEmail from "./components/Pages/Recipes/RecipesAddAggregatedEmail";
+import RecipesRunHistory from "./components/Pages/RecipesRunHistory";
 
 
 export default function Router() {
@@ -46,6 +47,11 @@ export default function Router() {
           <ProtectedRoute exact path="/accounts" component={Accounts} />
 
           <ProtectedRoute exact path="/recipes" component={Recipes} />
+          <ProtectedRoute
+            exact
+            path="/recipes/run_history"
+            component={RecipesRunHistory}
+          />
           <ProtectedRoute
             exact
             path="/recipes/explore"

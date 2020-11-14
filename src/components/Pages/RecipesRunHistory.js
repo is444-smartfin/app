@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { format, formatDistance, parseISO } from "date-fns";
 import { API_URL } from "../../utils/utils";
 
 const cardEqualHeight = {
@@ -14,7 +15,7 @@ const cardFooter = {
   marginTop: "auto",
 };
 
-function Recipes() {
+function RecipesRunHistory() {
   const { user, getAccessTokenSilently } = useAuth0();
   const [userRecipes, setUserRecipes] = useState(null);
 
@@ -25,7 +26,7 @@ function Recipes() {
     const getAllRecipes = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        const apiUrl = `${API_URL}/recipes/list`;
+        const apiUrl = `${API_URL}/recipes/run_history`;
         const metadataResponse = await fetch(apiUrl, {
           method: "POST",
           headers: {
@@ -53,44 +54,25 @@ function Recipes() {
       return (
         <>
           {Object.keys(recipes).map((i) => {
-            console.log(recipes[i]);
-            if (recipes[i].task_name === "tbank.salary.transfer") {
-              return (
-                <div className="card mb-4" key={recipes[i].task_name}>
-                  <div className="card-content">
-                    <div className="content">
-                      <h2>{recipes[i].task_name}</h2>
-                      <div>Creation time: {recipes[i].creation_time}</div>
-                      <div>Expiration time: {recipes[i].expiration_time}</div>
-                      <div>From account: {recipes[i].data.from}</div>
-                      <div>To account: {recipes[i].data.to}</div>
-                      <div>% to transfer: {recipes[i].data.amount}</div>
-                      <div>Schedule: {recipes[i].data.schedule}</div>
+            const date = parseISO(recipes[i].run_time);
+            const runTime = format(date, "PPp");
+            const timeAgo = formatDistance(new Date(), date);
+            return (
+              <div className="card mb-4" key={recipes[i].id}>
+                <div className="card-content">
+                  <div className="content">
+                    <h2>{recipes[i].data.task_name}</h2>
+                    <div>
+                      Event ID: <code>{recipes[i].id}</code>
+                    </div>
+                    <div>
+                      Run time: {runTime}{" "}
+                      <span className="tag is-light">{timeAgo} ago</span>
                     </div>
                   </div>
-                  <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Delete</div>
-                  </footer>
                 </div>
-              );
-            }
-            if (recipes[i].task_name === "smartfin.aggregated_email") {
-              return (
-                <div className="card mb-4" key={recipes[i].task_name}>
-                  <div className="card-content">
-                    <div className="content">
-                      <h2>{recipes[i].task_name}</h2>
-                      <div>Creation time: {recipes[i].creation_time}</div>
-                      <div>Expiration time: {recipes[i].expiration_time}</div>
-                      <div>Schedule: {recipes[i].data.schedule}</div>
-                    </div>
-                  </div>
-                  <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Delete</div>
-                  </footer>
-                </div>
-              );
-            }
+              </div>
+            );
           })}
         </>
       );
@@ -133,11 +115,11 @@ function Recipes() {
               <p className="menu-label">Recipes</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/recipes" className="is-active">
-                    My Recipes
-                  </Link>
+                  <Link to="/recipes">My Recipes</Link>
                   <Link to="/recipes/explore">Explore Recipes</Link>
-                  <Link to="/recipes/run_history">Run History</Link>
+                  <Link to="/recipes/run_history" className="is-active">
+                    Run History
+                  </Link>
                 </li>
               </ul>
             </aside>
@@ -177,4 +159,4 @@ function Recipes() {
   );
 }
 
-export default Recipes;
+export default RecipesRunHistory;

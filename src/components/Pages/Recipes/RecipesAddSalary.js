@@ -111,12 +111,11 @@ function RecipesAddSalary() {
               <p className="menu-label">Recipes</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/recipes">View All Recipes</Link>
-                </li>
-                <li>
+                  <Link to="/recipes">My Recipes</Link>
                   <Link to="/recipes/explore" className="is-active">
-                    Add Recipes
+                    Explore Recipes
                   </Link>
+                  <Link to="/recipes/run_history">Run History</Link>
                 </li>
               </ul>
             </aside>

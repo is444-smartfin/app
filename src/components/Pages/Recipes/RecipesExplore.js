@@ -33,13 +33,14 @@ function RecipesExplore() {
         <div className="columns">
           <div className="column is-2">
             <aside className="menu">
-              <p className="menu-label">Partners</p>
+              <p className="menu-label">Recipes</p>
               <ul className="menu-list">
                 <li>
                   <Link to="/recipes">My Recipes</Link>
                   <Link to="/recipes/explore" className="is-active">
                     Explore Recipes
                   </Link>
+                  <Link to="/recipes/run_history">Run History</Link>
                 </li>
               </ul>
             </aside>

@@ -114,12 +114,11 @@ function RecipesAddAggregatedEmail() {
               <p className="menu-label">Recipes</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/recipes">View All Recipes</Link>
-                </li>
-                <li>
-                  <Link to="/recipes" className="is-active">
-                    Add Recipes
+                  <Link to="/recipes">My Recipes</Link>
+                  <Link to="/recipes/explore" className="is-active">
+                    Explore Recipes
                   </Link>
+                  <Link to="/recipes/run_history">Run History</Link>
                 </li>
               </ul>
             </aside>
