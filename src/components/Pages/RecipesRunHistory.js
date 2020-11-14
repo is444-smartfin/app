@@ -5,12 +5,6 @@ import { Link } from "react-router-dom";
 import { format, formatDistance, parseISO } from "date-fns";
 import { API_URL } from "../../utils/utils";
 
-const cardEqualHeight = {
-  display: "flex",
-  flexDirection: "column",
-  height: "100%",
-};
-
 const cardFooter = {
   marginTop: "auto",
 };
@@ -66,6 +60,10 @@ function RecipesRunHistory() {
                       Event ID: <code>{recipes[i].id}</code>
                     </div>
                     <div>
+                      AWS Lambda Correlation ID:
+                      <code>{recipes[i].data.correlation_id}</code>
+                    </div>
+                    <div>
                       Run time: {runTime}{" "}
                       <span className="tag is-light">{timeAgo} ago</span>
                     </div>
@@ -82,8 +80,8 @@ function RecipesRunHistory() {
         <div className="card mb-4">
           <div className="card-content">
             <div className="content">
-              <h2>Oh no!</h2>
-              You do not have any recipes.
+              <h2>Nope!</h2>
+              You haven&rsquo;t ran any tasks yet. Come back again to check it out once your tasks have run.
             </div>
           </div>
           <footer className="card-footer" style={cardFooter}>
@@ -101,9 +99,9 @@ function RecipesRunHistory() {
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">My recipes</h1>
+            <h1 className="title">Run history</h1>
             <h2 className="subtitle">
-              Here you can see all the recipes you&rsquo;ve created.
+              Here you can see the history of all tasks that you have run.
             </h2>
           </div>
         </div>

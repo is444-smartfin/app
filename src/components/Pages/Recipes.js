@@ -2,13 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { format, formatDistance, parseISO } from "date-fns";
 import { API_URL } from "../../utils/utils";
-
-const cardEqualHeight = {
-  display: "flex",
-  flexDirection: "column",
-  height: "100%",
-};
 
 const cardFooter = {
   marginTop: "auto",
@@ -54,17 +49,36 @@ function Recipes() {
         <>
           {Object.keys(recipes).map((i) => {
             console.log(recipes[i]);
+            const creationTime = parseISO(recipes[i].creation_time);
+            const creationTimeFormatted = format(creationTime, "PPp");
+            const creationTimeAgo = formatDistance(new Date(), creationTime);
+            const expirationTime = parseISO(recipes[i].expiration_time);
+            const expirationTimeFormatted = format(expirationTime, "PPp");
+            const expirationTimeAgo = formatDistance(
+              new Date(),
+              expirationTime
+            );
             if (recipes[i].task_name === "tbank.salary.transfer") {
               return (
                 <div className="card mb-4" key={recipes[i].task_name}>
                   <div className="card-content">
                     <div className="content">
                       <h2>{recipes[i].task_name}</h2>
-                      <div>Creation time: {recipes[i].creation_time}</div>
-                      <div>Expiration time: {recipes[i].expiration_time}</div>
+                      <div>
+                        Creation time: {creationTimeFormatted}{" "}
+                        <span className="tag is-light">
+                          {creationTimeAgo} ago
+                        </span>
+                      </div>
+                      <div>
+                        Next run time: {expirationTimeFormatted}{" "}
+                        <span className="tag is-light">
+                          {expirationTimeAgo} ago
+                        </span>
+                      </div>
                       <div>From account: {recipes[i].data.from}</div>
                       <div>To account: {recipes[i].data.to}</div>
-                      <div>% to transfer: {recipes[i].data.amount}</div>
+                      <div>S$ to transfer: {recipes[i].data.amount}</div>
                       <div>Schedule: {recipes[i].data.schedule}</div>
                     </div>
                   </div>

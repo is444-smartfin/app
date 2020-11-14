@@ -201,7 +201,7 @@ function RecipesAddSalary() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          % of incoming amount to transfer
+                          S$ to transfer
                           <input
                             type="number"
                             name="amount"

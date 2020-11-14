@@ -16,7 +16,6 @@ import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
 import RecipesAddAggregatedEmail from "./components/Pages/Recipes/RecipesAddAggregatedEmail";
 import RecipesRunHistory from "./components/Pages/RecipesRunHistory";
 
-
 export default function Router() {
   return (
     <BrowserRouter>
@@ -75,7 +74,14 @@ export default function Router() {
       <footer>
         <div className="content has-text-centered">
           <p>
-            Build v1.0.0-{process.env.REACT_APP_COMMIT_REF?.substring(0, 6)}
+            Build v1.0.0-
+            <a
+              href="https://github.com/ourfintech/app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {process.env.REACT_APP_COMMIT_REF?.substring(0, 7)}
+            </a>
           </p>
         </div>
       </footer>
