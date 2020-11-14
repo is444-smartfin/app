@@ -56,12 +56,15 @@ function Recipes() {
             });
             const expirationTime = parseISO(recipes[i].expiration_time);
             const expirationTimeFormatted = format(expirationTime, "PPp");
-            console.log(isAfter(expirationTime, new Date()));
-            const expirationTimeAgo = isAfter(expirationTime, new Date())
-              ? formatDistance(new Date(), expirationTime, { addSuffix: true })
-              : formatDistance(expirationTime, new Date(), {
-                  addSuffix: true,
-                });
+            console.log(
+              isAfter(expirationTime, new Date()),
+              recipes[i].task_name
+            );
+            const expirationTimeAgo = formatDistance(
+              expirationTime,
+              new Date(),
+              { addSuffix: true }
+            );
             if (recipes[i].task_name === "tbank.salary.transfer") {
               return (
                 <div className="card mb-4" key={recipes[i].task_name}>
@@ -96,8 +99,16 @@ function Recipes() {
                   <div className="card-content">
                     <div className="content">
                       <h2>{recipes[i].task_name}</h2>
-                      <div>Creation time: {recipes[i].creation_time}</div>
-                      <div>Expiration time: {recipes[i].expiration_time}</div>
+                      <div>
+                        Creation time: {creationTimeFormatted}{" "}
+                        <span className="tag is-light">{creationTimeAgo}</span>
+                      </div>
+                      <div>
+                        Next run time: {expirationTimeFormatted}{" "}
+                        <span className="tag is-light">
+                          {expirationTimeAgo}
+                        </span>
+                      </div>
                       <div>Schedule: {recipes[i].data.schedule}</div>
                     </div>
                   </div>
