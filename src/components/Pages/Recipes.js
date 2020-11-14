@@ -58,13 +58,8 @@ function Recipes() {
             const expirationTimeFormatted = format(expirationTime, "PPp");
             console.log(isAfter(expirationTime, new Date()));
             const expirationTimeAgo = isAfter(expirationTime, new Date())
-              ? formatDistance(
-                  
-                  new Date(),
-                  expirationTime,
-                  { addSuffix: true }
-                )
-              : formatDistance(expirationTime, new Date(),  {
+              ? formatDistance(new Date(), expirationTime, { addSuffix: true })
+              : formatDistance(expirationTime, new Date(), {
                   addSuffix: true,
                 });
             if (recipes[i].task_name === "tbank.salary.transfer") {
