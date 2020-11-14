@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { format, formatDistance, parseISO } from "date-fns";
+import { format, formatDistance, isAfter, parseISO } from "date-fns";
 import { API_URL } from "../../utils/utils";
 
 const cardFooter = {
@@ -56,17 +56,17 @@ function Recipes() {
             });
             const expirationTime = parseISO(recipes[i].expiration_time);
             const expirationTimeFormatted = format(expirationTime, "PPp");
-            const expirationTimeAgo =
-              expirationTime < new Date()
-                ? formatDistance(
-                    expirationTime,
-                    new Date(),
-
-                    { addSuffix: true }
-                  )
-                : formatDistance(new Date(), expirationTime, {
-                    addSuffix: true,
-                  });
+            console.log(isAfter(expirationTime, new Date()));
+            const expirationTimeAgo = isAfter(expirationTime, new Date())
+              ? formatDistance(
+                  
+                  new Date(),
+                  expirationTime,
+                  { addSuffix: true }
+                )
+              : formatDistance(expirationTime, new Date(),  {
+                  addSuffix: true,
+                });
             if (recipes[i].task_name === "tbank.salary.transfer") {
               return (
                 <div className="card mb-4" key={recipes[i].task_name}>
