@@ -48,9 +48,11 @@ function RecipesRunHistory() {
       return (
         <>
           {Object.keys(recipes).map((i) => {
-            const date = parseISO(recipes[i].run_time);
-            const runTime = format(date, "PPp");
-            const timeAgo = formatDistance(new Date(), date);
+            const runTime = parseISO(recipes[i].run_time);
+            const runTimeFormatted = format(runTime, "PPp");
+            const runTimeAgo = formatDistance(runTime, new Date(), {
+              addSuffix: true,
+            });
             return (
               <div className="card mb-4" key={recipes[i].id}>
                 <div className="card-content">
@@ -64,8 +66,8 @@ function RecipesRunHistory() {
                       <code>{recipes[i].data.correlation_id}</code>
                     </div>
                     <div>
-                      Run time: {runTime}{" "}
-                      <span className="tag is-light">{timeAgo} ago</span>
+                      Run time: {runTimeFormatted}{" "}
+                      <span className="tag is-light">{runTimeAgo}</span>
                     </div>
                   </div>
                 </div>
@@ -81,7 +83,8 @@ function RecipesRunHistory() {
           <div className="card-content">
             <div className="content">
               <h2>Nope!</h2>
-              You haven&rsquo;t ran any tasks yet. Come back again to check it out once your tasks have run.
+              You haven&rsquo;t ran any tasks yet. Come back again to check it
+              out once your tasks have run.
             </div>
           </div>
           <footer className="card-footer" style={cardFooter}>

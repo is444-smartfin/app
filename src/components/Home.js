@@ -56,7 +56,7 @@ function Home() {
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
+                <Link to="/recipes/explore" className="card-footer-item">
                   Connect
                 </Link>
               </footer>
@@ -82,7 +82,7 @@ function Home() {
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
+                <Link to="/recipes/explore" className="card-footer-item">
                   Connect
                 </Link>
               </footer>
@@ -109,9 +109,9 @@ function Home() {
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
-                  Connect
-                </Link>
+                <span className="card-footer-item" disabled>
+                  Coming Soon
+                </span>
               </footer>
             </div>
           </div>

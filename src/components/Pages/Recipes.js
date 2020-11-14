@@ -51,13 +51,22 @@ function Recipes() {
             console.log(recipes[i]);
             const creationTime = parseISO(recipes[i].creation_time);
             const creationTimeFormatted = format(creationTime, "PPp");
-            const creationTimeAgo = formatDistance(new Date(), creationTime);
+            const creationTimeAgo = formatDistance(creationTime, new Date(), {
+              addSuffix: true,
+            });
             const expirationTime = parseISO(recipes[i].expiration_time);
             const expirationTimeFormatted = format(expirationTime, "PPp");
-            const expirationTimeAgo = formatDistance(
-              new Date(),
-              expirationTime
-            );
+            const expirationTimeAgo =
+              expirationTime < new Date()
+                ? formatDistance(
+                    expirationTime,
+                    new Date(),
+
+                    { addSuffix: true }
+                  )
+                : formatDistance(new Date(), expirationTime, {
+                    addSuffix: true,
+                  });
             if (recipes[i].task_name === "tbank.salary.transfer") {
               return (
                 <div className="card mb-4" key={recipes[i].task_name}>
@@ -66,14 +75,12 @@ function Recipes() {
                       <h2>{recipes[i].task_name}</h2>
                       <div>
                         Creation time: {creationTimeFormatted}{" "}
-                        <span className="tag is-light">
-                          {creationTimeAgo} ago
-                        </span>
+                        <span className="tag is-light">{creationTimeAgo}</span>
                       </div>
                       <div>
                         Next run time: {expirationTimeFormatted}{" "}
                         <span className="tag is-light">
-                          {expirationTimeAgo} ago
+                          {expirationTimeAgo}
                         </span>
                       </div>
                       <div>From account: {recipes[i].data.from}</div>

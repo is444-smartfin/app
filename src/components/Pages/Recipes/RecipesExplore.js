@@ -115,9 +115,9 @@ function RecipesExplore() {
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <Link to="/" className="card-footer-item">
-                  Connect
-                </Link>
+                <span className="card-footer-item" disabled>
+                  Coming Soon
+                </span>
               </footer>
             </div>
           </div>
