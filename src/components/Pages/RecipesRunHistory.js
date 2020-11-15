@@ -65,6 +65,26 @@ function RecipesRunHistory() {
                       AWS Lambda Correlation ID:
                       <code>{recipes[i].data.correlation_id}</code>
                     </div>
+                    {recipes[i].data.task_name === "tbank.salary.transfer" ? (
+                      <>
+                        <div>
+                          tBank Transaction ID
+                          <code>{recipes[i].data.tbank_transaction_id}</code>
+                        </div>
+                        <div>
+                          tBank Transaction Amount S$
+                          <code>
+                            {recipes[i].data.tbank_transaction_amount}
+                          </code>
+                        </div>
+                        <div>
+                          tBank Transaction Narrative
+                          <code>{recipes[i].data.tbank_narrative}</code>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                     <div>
                       Run time: {runTimeFormatted}{" "}
                       <span className="tag is-light">{runTimeAgo}</span>
