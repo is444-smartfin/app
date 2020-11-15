@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../../utils/utils";
+import { API_URL } from "../../utils/utils";
 
 const cardEqualHeight = {
   display: "flex",
@@ -15,7 +15,7 @@ const initialFormData = Object.freeze({
   otp: "",
 });
 
-function RecipesAdd() {
+function AccountsLinkDBS() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
@@ -31,12 +31,12 @@ function RecipesAdd() {
   // Step 1: Request OTP
   const handleRequestOtp = () => {
     // e.preventDefault();
-    const data = { ...formData };
+    const data = { ...formData, bank: "dbs" };
 
     const requestOtp = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/mfa`, {
+        fetch(`${API_URL}/accounts/mfa`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -61,12 +61,12 @@ function RecipesAdd() {
   // Step 2: Link account
   const handleSubmit = () => {
     // e.preventDefault();
-    const data = { ...formData };
+    const data = { ...formData, bank: "dbs" };
 
     const requestAccountLinkage = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        fetch(`${API_URL}/accounts/tbank/link`, {
+        fetch(`${API_URL}/accounts/link`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -77,9 +77,11 @@ function RecipesAdd() {
         })
           .then((response) => response.json())
           .then((json) => {
+            console.log(json);
             setFormStatus(json?.message);
           });
       } catch (e) {
+        console.error(e.message);
         setFormStatus(e.message);
       }
     };
@@ -92,7 +94,7 @@ function RecipesAdd() {
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">Link tBank Account</h1>
+            <h1 className="title">Link DBS Account</h1>
             <h2 className="subtitle">You&rsquo;re almost there!</h2>
           </div>
         </div>
@@ -101,14 +103,15 @@ function RecipesAdd() {
         <div className="columns">
           <div className="column is-2">
             <aside className="menu">
-              <p className="menu-label">Recipes</p>
+              <p className="menu-label">Integration</p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/recipes">My Recipes</Link>
-                  <Link to="/recipes/explore" className="is-active">
-                    Explore Recipes
+                  <Link to="/accounts">View All Accounts</Link>
+                </li>
+                <li>
+                  <Link to="/accounts/link" className="is-active">
+                    Link Accounts
                   </Link>
-                  <Link to="/recipes/run_history">Run History</Link>
                 </li>
               </ul>
             </aside>
@@ -119,11 +122,11 @@ function RecipesAdd() {
                 <div className="content">
                   <h2>
                     <img
-                      src="https://tbankonline.com/img/tBank.ico"
-                      alt="tBank Logo"
+                      src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
+                      alt="DBS Logo"
                       className="image is-24x24 is-inline-block"
                     />{" "}
-                    tBank
+                    DBS
                   </h2>
                   <div className="columns">
                     <div className="column">
@@ -169,6 +172,7 @@ function RecipesAdd() {
                             inputMode="numeric"
                             maxLength="6"
                             onChange={handleChange}
+                            autoComplete="one-time-code"
                           />
                         </div>
                         <div className="control">
@@ -205,4 +209,4 @@ function RecipesAdd() {
   );
 }
 
-export default RecipesAdd;
+export default AccountsLinkDBS;

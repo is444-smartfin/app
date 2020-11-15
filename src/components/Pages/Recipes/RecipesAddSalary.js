@@ -12,7 +12,7 @@ const cardEqualHeight = {
 const initialFormData = Object.freeze({
   accountFrom: "",
   accountTo: "",
-  amount: 1,
+  amount: "1",
   keyword: "salary",
   taskName: "tbank.salary.transfer",
 });
@@ -202,7 +202,7 @@ function RecipesAddSalary() {
 
                       <div className="field">
                         <label className="label" htmlFor="keyword">
-                          % of salary to transfer
+                          Keyword to search
                           <input
                             type="text"
                             name="keyword"

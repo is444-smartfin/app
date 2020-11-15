@@ -10,9 +10,10 @@ const cardEqualHeight = {
 };
 
 const initialFormData = Object.freeze({
-  accountFrom: "",
-  accountTo: "",
-  amount: 30,
+  accountTbank: "",
+  accountOcbc: "",
+  accountDbs: "",
+  frequency: "weekly",
   taskName: "smartfin.aggregated_email",
 });
 
@@ -20,7 +21,9 @@ function RecipesAddAggregatedEmail() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
-  const [accountsList, setAccountsList] = useState([]);
+  const [tbankList, setTbankList] = useState([]);
+  const [ocbcList, setOcbcList] = useState([]);
+  const [dbsList, setDbsList] = useState([]);
 
   const handleChange = (e) => {
     setFormData({
@@ -38,7 +41,7 @@ function RecipesAddAggregatedEmail() {
     const getUserMetadata = async () => {
       try {
         const accessToken = await getAccessTokenSilently();
-        const apiUrl = `${API_URL}/integrations/tbank/user_accounts`;
+        const apiUrl = `${API_URL}/integrations/smartfin/user_accounts`;
         const response = await fetch(apiUrl, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -46,7 +49,10 @@ function RecipesAddAggregatedEmail() {
           signal,
         });
         const data = await response.json();
-        setAccountsList(data.data);
+        console.log(data);
+        setTbankList(data.data?.tbank);
+        setOcbcList(data.data?.ocbc);
+        setDbsList(data.data?.dbs);
       } catch (e) {
         console.error(e.message);
       }
@@ -138,7 +144,7 @@ function RecipesAddAggregatedEmail() {
                           <div className="control">
                             <div className="select">
                               <select
-                                name="accountFrom"
+                                name="accountTbank"
                                 onChange={handleChange}
                                 defaultValue=""
                               >
@@ -146,9 +152,9 @@ function RecipesAddAggregatedEmail() {
                                   {" "}
                                   -- select an account --{" "}
                                 </option>
-                                {accountsList.length > 0 ? (
+                                {tbankList.length > 0 ? (
                                   <>
-                                    {Object.values(accountsList).map((row) => (
+                                    {Object.values(tbankList).map((row) => (
                                       <option
                                         value={row.accountID}
                                         key={row.accountID}
@@ -173,7 +179,7 @@ function RecipesAddAggregatedEmail() {
                           <div className="control">
                             <div className="select">
                               <select
-                                name="accountTo"
+                                name="accountOcbc"
                                 onChange={handleChange}
                                 defaultValue=""
                               >
@@ -181,9 +187,9 @@ function RecipesAddAggregatedEmail() {
                                   {" "}
                                   -- select an account --{" "}
                                 </option>
-                                {accountsList.length > 0 ? (
+                                {ocbcList.length > 0 ? (
                                   <>
-                                    {Object.values(accountsList).map((row) => (
+                                    {Object.values(ocbcList).map((row) => (
                                       <option
                                         value={row.accountID}
                                         key={row.accountID}
@@ -204,13 +210,49 @@ function RecipesAddAggregatedEmail() {
 
                       <div className="field">
                         <label className="label" htmlFor="pin">
-                          Amount to transfer
+                          Accounts (DBS)
+                          <div className="control">
+                            <div className="select">
+                              <select
+                                name="accountDbs"
+                                onChange={handleChange}
+                                defaultValue=""
+                              >
+                                <option disabled value="">
+                                  {" "}
+                                  -- select an account --{" "}
+                                </option>
+                                {dbsList.length > 0 ? (
+                                  <>
+                                    {Object.values(dbsList).map((row) => (
+                                      <option
+                                        value={row.accountID}
+                                        key={row.accountID}
+                                      >
+                                        {row.accountID} ({row.currency}{" "}
+                                        {row.balance})
+                                      </option>
+                                    ))}
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="frequency">
+                          Frequency
                           <input
-                            type="number"
-                            name="amount"
+                            type="text"
+                            name="frequency"
                             className="input control"
-                            defaultValue={initialFormData.amount}
+                            defaultValue={initialFormData.frequency}
                             onChange={handleChange}
+                            disabled
                           />
                         </label>
                       </div>

@@ -100,7 +100,10 @@ function RecipesExplore() {
             </div>
             <footer className="card-footer" style={cardFooter}>
               {requirements?.tbank ? (
-                <Link to="/recipes/add/salary" className="card-footer-item">
+                <Link
+                  to="/recipes/add/aggregated_email"
+                  className="card-footer-item"
+                >
                   Connect
                 </Link>
               ) : (

@@ -90,18 +90,18 @@ function AccountsLink() {
                   <h2>
                     <img
                       src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
-                      alt="tBank Logo"
+                      alt="DBS Logo"
                       className="image is-24x24 is-inline-block"
                     />{" "}
                     DBS
                   </h2>
-                  Coming Soon
+                  Link your DBS account
                 </div>
               </div>
               <footer className="card-footer" style={cardFooter}>
-                <span className="card-footer-item" disabled>
-                  Coming Soon
-                </span>
+                <Link to="/accounts/link/dbs" className="card-footer-item">
+                  Link
+                </Link>
               </footer>
             </div>
           </div>

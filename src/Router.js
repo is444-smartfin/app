@@ -11,10 +11,10 @@ import AccountsLinktBank from "./components/Pages/AccountsLinktBank";
 import Accounts from "./components/Pages/Accounts";
 import Recipes from "./components/Pages/Recipes";
 import RecipesExplore from "./components/Pages/Recipes/RecipesExplore";
-import RecipesAdd from "./components/Pages/Recipes/RecipesAdd";
 import RecipesAddSalary from "./components/Pages/Recipes/RecipesAddSalary";
 import RecipesAddAggregatedEmail from "./components/Pages/Recipes/RecipesAddAggregatedEmail";
 import RecipesRunHistory from "./components/Pages/RecipesRunHistory";
+import AccountsLinkDBS from "./components/Pages/AccountsLinkDBS";
 
 export default function Router() {
   return (
@@ -43,6 +43,11 @@ export default function Router() {
             path="/accounts/link/ocbc"
             component={AccountsLinkOCBC}
           />
+          <ProtectedRoute
+            exact
+            path="/accounts/link/dbs"
+            component={AccountsLinkDBS}
+          />
           <ProtectedRoute exact path="/accounts" component={Accounts} />
 
           <ProtectedRoute exact path="/recipes" component={Recipes} />
@@ -56,7 +61,6 @@ export default function Router() {
             path="/recipes/explore"
             component={RecipesExplore}
           />
-          <ProtectedRoute exact path="/recipes/add" component={RecipesAdd} />
           <ProtectedRoute
             exact
             path="/recipes/add/salary"
