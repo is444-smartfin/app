@@ -202,7 +202,7 @@ function RecipesAddSalary() {
 
                       <div className="field">
                         <label className="label" htmlFor="keyword">
-                          % of salary to transfer
+                          Keyword to search
                           <input
                             type="text"
                             name="keyword"

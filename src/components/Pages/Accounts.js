@@ -61,6 +61,18 @@ function Accounts() {
         </>
       );
     }
+    if (name === "dbs") {
+      return (
+        <>
+          <img
+            src="https://www.dbs.com.sg/o/corporate-theme/images/favicon.ico"
+            alt="DBS Logo"
+            className="image is-24x24 is-inline-block"
+          />{" "}
+          DBS
+        </>
+      );
+    }
     return (
       <>
         <img
