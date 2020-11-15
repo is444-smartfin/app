@@ -12,7 +12,7 @@ const cardEqualHeight = {
 const initialFormData = Object.freeze({
   accountFrom: "",
   accountTo: "",
-  amount: 0.8,
+  amount: 1,
   keyword: "salary",
   taskName: "tbank.salary.transfer",
 });
