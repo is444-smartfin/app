@@ -83,7 +83,9 @@ function Recipes() {
                       </div>
                       <div>From account: {recipes[i].data.from}</div>
                       <div>To account: {recipes[i].data.to}</div>
-                      <div>S$ to transfer: {recipes[i].data.amount}</div>
+                      <div>
+                        % of salary to transfer: {recipes[i].data.amount}
+                      </div>
                       <div>Schedule: {recipes[i].data.schedule}</div>
                     </div>
                   </div>

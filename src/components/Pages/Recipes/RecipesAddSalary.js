@@ -12,7 +12,8 @@ const cardEqualHeight = {
 const initialFormData = Object.freeze({
   accountFrom: "",
   accountTo: "",
-  amount: 30,
+  amount: 0.8,
+  keyword: "salary",
   taskName: "tbank.salary.transfer",
 });
 
@@ -200,8 +201,21 @@ function RecipesAddSalary() {
                       </div>
 
                       <div className="field">
-                        <label className="label" htmlFor="pin">
-                          S$ to transfer
+                        <label className="label" htmlFor="keyword">
+                          % of salary to transfer
+                          <input
+                            type="text"
+                            name="keyword"
+                            className="input control"
+                            defaultValue={initialFormData.keyword}
+                            disabled
+                          />
+                        </label>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="amount">
+                          % of salary to transfer
                           <input
                             type="number"
                             name="amount"

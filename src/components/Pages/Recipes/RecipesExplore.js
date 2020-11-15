@@ -176,23 +176,23 @@ function RecipesExplore() {
               <Skeleton
                 variant="rect"
                 animation="wave"
-                width="32%"
+                width="100%"
                 height={200}
-                className="mb-4"
+                className="mb-4 mr-4"
               />{" "}
               <Skeleton
                 variant="rect"
                 animation="wave"
-                width="32%"
+                width="100%"
                 height={200}
-                className="mb-4"
+                className="mb-4 mr-4"
               />{" "}
               <Skeleton
                 variant="rect"
                 animation="wave"
-                width="32%"
+                width="100%"
                 height={200}
-                className="mb-4"
+                className="mb-4 mr-4"
               />
             </>
           )}
