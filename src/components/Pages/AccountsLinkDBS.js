@@ -18,6 +18,7 @@ const initialFormData = Object.freeze({
 function AccountsLinkDBS() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
+  const [formStatusType, setFormStatusType] = useState("");
   const [formStatus, setFormStatus] = useState(null);
 
   const handleChange = (e) => {
@@ -48,10 +49,16 @@ function AccountsLinkDBS() {
           .then((response) => response.json())
           .then((json) => {
             setFormStatus(json?.message);
+            if (json?.status === 200) {
+              setFormStatusType("is-success is-light");
+            } else {
+              setFormStatusType("is-danger is-light");
+            }
           });
       } catch (e) {
         console.error(e.message);
         setFormStatus(e.message);
+        setFormStatusType("is-danger is-light");
       }
     };
 
@@ -77,17 +84,25 @@ function AccountsLinkDBS() {
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setFormStatus(json?.message);
+            if (json?.status === 200) {
+              setFormStatusType("is-success is-light");
+            } else {
+              setFormStatusType("is-danger is-light");
+            }
           });
       } catch (e) {
         console.error(e.message);
         setFormStatus(e.message);
+        setFormStatusType("is-danger is-light");
       }
     };
 
     requestAccountLinkage();
   };
+
+  const notificationIsHidden = formStatusType !== "" ? "" : "is-hidden";
+  const notificationClass = `notification ${formStatusType} ${notificationIsHidden}`;
 
   return (
     <div>
@@ -130,9 +145,7 @@ function AccountsLinkDBS() {
                   </h2>
                   <div className="columns">
                     <div className="column">
-                      <div className="notification">
-                        Form status text. <code>{formStatus}</code>
-                      </div>
+                      <div className={notificationClass}>{formStatus}</div>
                       <div className="field">
                         <label className="label" htmlFor="userId">
                           User ID
