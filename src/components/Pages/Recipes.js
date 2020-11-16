@@ -90,7 +90,7 @@ function Recipes() {
                     </div>
                   </div>
                   <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Manual Trigger</div>
+                    <div className="card-footer-item">Trigger Now</div>
                     <div className="card-footer-item">Delete</div>
                   </footer>
                 </div>
@@ -116,7 +116,7 @@ function Recipes() {
                     </div>
                   </div>
                   <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Manual Trigger</div>
+                    <div className="card-footer-item">Trigger Now</div>
                     <div className="card-footer-item">Delete</div>
                   </footer>
                 </div>

@@ -20,6 +20,7 @@ const initialFormData = Object.freeze({
 function RecipesAddSalary() {
   const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = useState(initialFormData);
+  const [formStatusType, setFormStatusType] = useState("");
   const [formStatus, setFormStatus] = useState(null);
   const [accountsList, setAccountsList] = useState([]);
 
@@ -82,15 +83,24 @@ function RecipesAddSalary() {
           .then((json) => {
             console.log(json);
             setFormStatus(json?.message);
+            if (json?.status === 200) {
+              setFormStatusType("is-success is-light");
+            } else {
+              setFormStatusType("is-danger is-light");
+            }
           });
       } catch (e) {
         console.error(e.message);
         setFormStatus(e.message);
+        setFormStatusType("is-danger is-light");
       }
     };
 
     postForm();
   };
+
+  const notificationIsHidden = formStatusType !== "" ? "" : "is-hidden";
+  const notificationClass = `notification ${formStatusType} ${notificationIsHidden}`;
 
   return (
     <div>
@@ -127,9 +137,7 @@ function RecipesAddSalary() {
                 <div className="content">
                   <div className="columns">
                     <div className="column">
-                      <div className="notification">
-                        Form status text. <code>{formStatus}</code>
-                      </div>
+                      <div className={notificationClass}>{formStatus}</div>
                       <div className="field">
                         <label className="label" htmlFor="userId">
                           From account number
