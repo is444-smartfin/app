@@ -11,6 +11,8 @@ const cardFooter = {
 
 function Recipes() {
   const { user, getAccessTokenSilently } = useAuth0();
+  const [formStatusType, setFormStatusType] = useState("");
+  const [formStatus, setFormStatus] = useState(null);
   const [userRecipes, setUserRecipes] = useState(null);
 
   useEffect(() => {
@@ -43,6 +45,46 @@ function Recipes() {
     };
   }, [getAccessTokenSilently, user]);
 
+  async function handleManualTrigger(taskName) {
+    try {
+      const accessToken = await getAccessTokenSilently();
+      let apiUrl = "";
+
+      if (taskName === "tbank.salary.transfer") {
+        apiUrl = `${API_URL}/integrations/tbank/recipe_salary_transfer/trigger`;
+      }
+      if (taskName === "smartfin.aggregated_email") {
+        apiUrl = `${API_URL}/integrations/smartfin/aggregated_email/trigger`;
+      }
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await response.json();
+      if (json?.message === "OK") {
+        setFormStatus(
+          `You've successfully triggered the task ${taskName}. Please check the status in Run History.`
+        );
+      } else {
+        setFormStatus(json?.message);
+      }
+
+      if (json?.status === 200) {
+        setFormStatusType("is-success is-light");
+      } else {
+        setFormStatusType("is-danger is-light");
+      }
+    } catch (e) {
+      console.error(e.message);
+      setFormStatus(e.message);
+      setFormStatusType("is-danger is-light");
+    }
+  }
+
   function RecipesList({ recipes }) {
     if (Object.keys(recipes).length > 0) {
       return (
@@ -70,7 +112,10 @@ function Recipes() {
                 <div className="card mb-4" key={recipes[i].task_name}>
                   <div className="card-content">
                     <div className="content">
-                      <h2>{recipes[i].task_name}</h2>
+                      <h2>💰 Save some of my salary to another account</h2>
+                      <div>
+                        Task Name: <code>{recipes[i].task_name}</code>
+                      </div>
                       <div>
                         Creation time: {creationTimeFormatted}{" "}
                         <span className="tag is-light">{creationTimeAgo}</span>
@@ -81,16 +126,35 @@ function Recipes() {
                           {expirationTimeAgo}
                         </span>
                       </div>
-                      <div>From account: {recipes[i].data.from}</div>
-                      <div>To account: {recipes[i].data.to}</div>
                       <div>
-                        % of salary to transfer: {recipes[i].data.amount}
+                        From account: <code>{recipes[i].data.from}</code>
                       </div>
-                      <div>Schedule: {recipes[i].data.schedule}</div>
+                      <div>
+                        To account: <code>{recipes[i].data.to}</code>
+                      </div>
+                      <div>
+                        Keyword: <code>salary</code>
+                      </div>
+                      <div>
+                        % of salary to transfer:{" "}
+                        <code>{recipes[i].data.amount}</code>
+                      </div>
+                      <div>
+                        Schedule: <code>{recipes[i].data.schedule}</code>
+                      </div>
                     </div>
                   </div>
                   <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Trigger Now</div>
+                    <div className="card-footer-item">
+                      <a
+                        onClick={async () =>
+                          handleManualTrigger(recipes[i].task_name)
+                        }
+                        style={{ cursor: "pointer" }}
+                      >
+                        Trigger Now
+                      </a>
+                    </div>
                     <div className="card-footer-item">Delete</div>
                   </footer>
                 </div>
@@ -101,7 +165,12 @@ function Recipes() {
                 <div className="card mb-4" key={recipes[i].task_name}>
                   <div className="card-content">
                     <div className="content">
-                      <h2>{recipes[i].task_name}</h2>
+                      <h2>
+                        📧 Send me a weekly aggregated transactions digest
+                      </h2>
+                      <div>
+                        Task Name: <code>{recipes[i].task_name}</code>
+                      </div>
                       <div>
                         Creation time: {creationTimeFormatted}{" "}
                         <span className="tag is-light">{creationTimeAgo}</span>
@@ -112,11 +181,23 @@ function Recipes() {
                           {expirationTimeAgo}
                         </span>
                       </div>
-                      <div>Schedule: {recipes[i].data.schedule}</div>
+                      <div>
+                        {" "}
+                        Schedule: <code>{recipes[i].data.schedule}</code>
+                      </div>
                     </div>
                   </div>
                   <footer className="card-footer" style={cardFooter}>
-                    <div className="card-footer-item">Trigger Now</div>
+                    <div className="card-footer-item">
+                      <a
+                        onClick={async () =>
+                          handleManualTrigger(recipes[i].task_name)
+                        }
+                        style={{ cursor: "pointer" }}
+                      >
+                        Trigger Now
+                      </a>
+                    </div>
                     <div className="card-footer-item">Delete</div>
                   </footer>
                 </div>
@@ -126,6 +207,7 @@ function Recipes() {
         </>
       );
     }
+
     return (
       <>
         <div className="card mb-4">
@@ -144,6 +226,8 @@ function Recipes() {
       </>
     );
   }
+  const notificationIsHidden = formStatusType !== "" ? "" : "is-hidden";
+  const notificationClass = `notification ${formStatusType} ${notificationIsHidden}`;
 
   return (
     <div>
@@ -174,6 +258,7 @@ function Recipes() {
             </aside>
           </div>
           <div className="column">
+            <div className={notificationClass}>{formStatus}</div>
             {userRecipes ? (
               <RecipesList recipes={userRecipes?.data} />
             ) : (

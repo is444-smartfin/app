@@ -53,11 +53,20 @@ function RecipesRunHistory() {
             const runTimeAgo = formatDistance(runTime, new Date(), {
               addSuffix: true,
             });
+            let taskNameTitle = "";
+            if (recipes[i].data.task_name === "tbank.salary.transfer")
+              taskNameTitle = "💰 Save some of my salary to another account";
+            if (recipes[i].data.task_name === "smartfin.aggregated_email")
+              taskNameTitle =
+                "📧 Send me a weekly aggregated transactions digest";
             return (
               <div className="card mb-4" key={recipes[i].id}>
                 <div className="card-content">
                   <div className="content">
-                    <h2>{recipes[i].data.task_name}</h2>
+                    <h2>{taskNameTitle}</h2>
+                    <div>
+                      Task Name: <code>{recipes[i].data.task_name}</code>
+                    </div>
                     <div>
                       Event ID: <code>{recipes[i].id}</code>
                     </div>
