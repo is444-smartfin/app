@@ -79,13 +79,13 @@ function TopNavbar() {
               Home
             </Link>
             <Link
-              to="/accounts"
+              to="/accounts/link"
               className="navbar-item"
               onClick={offBurgerMenu}
             >
               Accounts
             </Link>
-            <Link to="/recipes" className="navbar-item" onClick={offBurgerMenu}>
+            <Link to="/recipes/explore" className="navbar-item" onClick={offBurgerMenu}>
               Recipes
             </Link>
             <Link to="/profile" className="navbar-item" onClick={offBurgerMenu}>
